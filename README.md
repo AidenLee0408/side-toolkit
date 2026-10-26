@@ -50,6 +50,24 @@
 
 <br>
 
+## 자작 스킬
+
+직접 만든 스킬은 `side-skills` 플러그인으로 묶어 이 저장소에서 배포합니다.
+
+| 스킬 | 하는 일 |
+|---|---|
+| [writing-concise-korean](plugins/side-skills/skills/writing-concise-korean/SKILL.md) | 한국어판 caveman입니다. 내용은 줄이되 조사와 어미는 지켜서, 짧게 써도 문장이 깨지지 않게 합니다 |
+| [checking-korean-writing](plugins/side-skills/skills/checking-korean-writing/SKILL.md) | 한국어판 writing-quality입니다. 명사 나열, 명사로 끝나는 문장, 빗금, 영어 직역, 번역투를 찾아 알려 주고, 요청하면 고칩니다. 스캐너 스크립트가 들어 있습니다 |
+
+설치는 Claude Code에서 두 줄이면 됩니다.
+
+```
+/plugin marketplace add AidenLee0408/side-toolkit
+/plugin install side-skills@side-toolkit
+```
+
+<br>
+
 ## 운영 방식
 
 ```mermaid
