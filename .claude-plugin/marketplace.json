@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "1인 사이드 프로젝트용 자체 제작 Claude Code 스킬",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "plugins": [
     {
