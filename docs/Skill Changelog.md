@@ -7,7 +7,7 @@ last_reviewed: 2026-10-27
 
 # Skill Changelog
 
-스킬·플러그인의 **결정 변경**을 한 줄씩 맨 아래에 추가한다. 고치거나 지우지 않는다. 문제 기록은 [Skill Issues](Skill%20Issues.md), 지금 상태는 [Skills](Skills.md), 지금 우선순위는 [Skill Playbook](Skill%20Playbook.md)에 있다. 이 문서는 "언제, 무엇이, 왜 바뀌었나"만 남긴다.
+스킬이나 플러그인에 관한 결정이 바뀔 때마다 **맨 아래에 한 줄씩 추가**한다. 이미 쓴 줄은 고치거나 지우지 않는다. 이 문서에는 "언제, 무엇이, 왜 바뀌었나"만 남긴다. 문제 기록은 [Skill Issues](Skill%20Issues.md), 지금 상태는 [Skills](Skills.md), 지금 우선순위는 [Skill Playbook](Skill%20Playbook.md)에 있다.
 
 - 변경 종류: 설치 / 삭제 / 끄기 / 켜기 / 상태 변경 / 1순위 지정 / 1순위 변경 / 후순위 / 제외 / 규칙
 - 근거: Skill Issues 번호, 리포트 이름, 창업자 결정, 또는 `가설`

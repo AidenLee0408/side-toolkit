@@ -17,7 +17,7 @@
 | 작업별 사용 기준 | 16개 작업 |
 | 기록된 변경 / 이슈 | [Changelog](docs/Skill%20Changelog.md) · [Issues](docs/Skill%20Issues.md) |
 
-마지막 갱신: 2026-10-27 · 매주 1회 갱신
+마지막 갱신: 2026-10-27 (매주 갱신)
 
 <br>
 

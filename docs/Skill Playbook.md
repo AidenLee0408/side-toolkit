@@ -7,11 +7,11 @@ last_reviewed: 2026-10-27
 
 # Skill Playbook
 
-작업마다 어떤 스킬을 먼저 쓰는지, 무엇이 서로 부딪히는지, 언제 스킬을 쓰지 않는지 적는다. 처음 판은 **가설**이다. `Skill Reports/`에 실제 결과가 쌓이면 고치고, 고친 근거(리포트 이름)를 적는다. 스킬 목록은 [Skills](Skills.md).
+작업마다 어떤 스킬을 먼저 쓰는지, 어떤 스킬끼리 부딪히는지, 언제 스킬 없이 하는지 적는다. 지금 내용은 아직 **가설**이다. `Skill Reports/`에 실제 결과가 쌓이면 고치고, 근거가 된 리포트 이름을 적는다. 스킬 목록은 [Skills](Skills.md)에 있다.
 
 ## 1. 작업별 우선순위
 
-한 작업에 주력 스킬은 하나다. 보조는 필요할 때만 부른다.
+한 작업에는 주력 스킬을 하나만 둔다. 보조 스킬은 필요할 때만 부른다.
 
 | 작업 | 1순위 | 보조 | 쓰지 않는 것 | 근거 |
 |---|---|---|---|---|
@@ -30,7 +30,7 @@ last_reviewed: 2026-10-27
 | 가입·온보딩 | marketing-skills `signup`, `onboarding` | — | — | 가설 |
 | 런칭 | marketing-skills `launch`, `directory-submissions` | gtm-planner `roadmap` | — | 가설 |
 | 배포 전 점검 | engineering `deploy-checklist` | superpowers `verification-before-completion` | — | 가설 |
-| 허브 기록·문서 | 스킬 없이 | writing-quality (외부 공개 글만) | caveman (보고가 너무 짧아짐) | 가설 |
+| 허브 기록·문서 | 스킬 없음 | writing-quality (외부 공개 글만) | caveman (보고가 너무 짧아짐) | 가설 |
 
 ## 2. 부딪히는 조합
 
@@ -38,8 +38,8 @@ last_reviewed: 2026-10-27
 |---|---|---|---|
 | ponytail ↔ superpowers | "가장 작게"와 "계획·TDD 먼저" | 계획은 superpowers, 구현 범위 판단은 ponytail lite | 가설 |
 | ponytail ↔ caveman `lean-build` | 같은 역할(과설계 방지) | 하나만 남긴다. 리포트로 비교 | 가설 |
-| 디자인 4종 (frontend-design, taste-skill, ui-ux-pro-max, impeccable) | 서로 다른 미적 지시, 동시 발동 | 한 작업에 하나만. 위 표 기준 | 가설 |
-| caveman ↔ 창업자 보고 | 설명이 지나치게 짧아짐 | 허브 보고는 일반 말투 | 가설 |
+| 디자인 4종 (frontend-design, taste-skill, ui-ux-pro-max, impeccable) | 디자인 방향이 서로 다르고, 함께 발동할 수 있음 | 한 작업에 하나만. 위 표 기준 | 가설 |
+| caveman ↔ 창업자 보고 | 설명이 지나치게 짧아짐 | 허브 보고는 평소 말투로 쓴다 | 가설 |
 | impeccable 훅 ↔ UI 없는 작업 | 편집마다 실행, 답변 끝에 최대 30초 | 허브·백엔드 작업에서 느리면 끈다 | 가설 |
 | marketing(Anthropic) ↔ marketing-skills | 영역 중복 | 실행은 marketing-skills 우선. 첫 홍보 작업에서 비교해 하나만 남긴다 | 가설 |
 
@@ -50,11 +50,11 @@ last_reviewed: 2026-10-27
 - 이미 정해진 절차를 그대로 따르는 반복 작업
 - 스킬을 불렀더니 결과가 나빠지거나 느려진 작업 (리포트에 남긴다)
 
-판단 기준: 스킬이 주는 절차나 지식이 없으면 결과가 나빠질 작업에만 쓴다.
+판단 기준: 스킬의 절차나 지식이 없으면 결과가 나빠지는 작업에만 쓴다.
 
 ## 4. 이 문서를 고치는 방법
-0. 작업 중 스킬 이슈가 생기면 바로 [Skill Issues](Skill%20Issues.md)에 한 줄 추가한다. 이 문서의 1순위·충돌 표나 [Skills](Skills.md)의 상태를 바꾸면 [Skill Changelog](Skill%20Changelog.md)에 한 줄 추가한다.
-1. 프로젝트(또는 큰 작업)를 마치면 `python3 scripts/skill-usage.py --root <저장소> --since <시작일>`로 사용 횟수를 뽑고, `Skill Reports/_Template.md`로 리포트를 쓴다.
-2. 주간 리뷰 때 새 리포트를 읽고, 같은 결과가 두 번 이상 나오면 위 표의 근거를 "가설"에서 리포트 이름으로 바꾼다.
-3. 스킬 상태(시험 중 → 채택/제외)는 [Skills](Skills.md)에서 바꾼다. 제외는 창업자가 정한다.
-4. 월간 재검토 때 전체 집계(`python3 scripts/skill-usage.py --root ~/SideProjects --since <한 달 전>`)로 한 번도 안 쓴 플러그인을 찾아 끄기 후보로 올린다.
+1. 작업 중 스킬 이슈가 생기면 바로 [Skill Issues](Skill%20Issues.md)에 한 줄 추가한다. 이 문서의 1순위·충돌 표나 [Skills](Skills.md)의 상태를 바꾸면 [Skill Changelog](Skill%20Changelog.md)에 한 줄 추가한다.
+2. 프로젝트(또는 큰 작업)를 마치면 `python3 scripts/skill-usage.py --root <저장소> --since <시작일>`로 사용 횟수를 뽑고, `Skill Reports/_Template.md`로 리포트를 쓴다.
+3. 주간 리뷰 때 새 리포트를 읽고, 같은 결과가 두 번 이상 나오면 위 표의 근거를 "가설"에서 리포트 이름으로 바꾼다.
+4. 스킬 상태(시험 중 → 채택/제외)는 [Skills](Skills.md)에서 바꾼다. 제외는 창업자가 정한다.
+5. 월간 재검토 때 전체 집계(`python3 scripts/skill-usage.py --root ~/SideProjects --since <한 달 전>`)로 한 번도 안 쓴 플러그인을 찾아 끄기 후보로 올린다.
