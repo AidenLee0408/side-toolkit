@@ -1,9 +1,9 @@
 # side-toolkit
 
-> 혼자 사이드 프로젝트를 만들고, 배포하고, 파는 사람이 쓰는 **Claude Code 플러그인·스킬 운영 기록**입니다.
-> 무엇을 왜 설치했는지, 작업마다 무엇을 먼저 쓰는지, 써 보니 어땠는지를 남깁니다.
+> 1인 개발자가 Claude Code로 사이드 프로젝트를 만들면서 쓰는 **플러그인과 스킬 기록**입니다.
+> 어떤 플러그인을 왜 골랐는지, 작업별로 어떤 스킬을 쓰는지, 실제로 써 보니 어땠는지 정리합니다.
 
-**English:** A solo maker's operating log for Claude Code plugins and skills — what is installed and why, which skill to reach for on each task, where skills clash, and what changed over time. Docs are in Korean; the tables are easy to scan with a translator.
+**English:** Notes from a solo developer on the Claude Code plugins and skills used to build side projects: what was chosen and why, which skill fits each task, and how each one held up in real work. The docs are written in Korean.
 
 <br>
 
