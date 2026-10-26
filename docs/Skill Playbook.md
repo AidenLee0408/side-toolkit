@@ -30,7 +30,9 @@ last_reviewed: 2026-10-27
 | 가입·온보딩 | marketing-skills `signup`, `onboarding` | — | — | 가설 |
 | 런칭 | marketing-skills `launch`, `directory-submissions` | gtm-planner `roadmap` | — | 가설 |
 | 배포 전 점검 | engineering `deploy-checklist` | superpowers `verification-before-completion` | — | 가설 |
-| 허브 기록·문서 | 스킬 없음 | writing-quality (외부 공개 글만) | caveman (보고가 너무 짧아짐) | 가설 |
+| 허브 기록·문서 | 스킬 없음 | — | caveman (보고가 너무 짧아짐) | 가설 |
+| 한국어 공개 문서 (README, side-toolkit) | fluent-korean (출력 스타일로 쓰는 단계부터, 허브·제품만) → checking-korean-writing (공개 전 점검) | humanize-korean (긴 글을 깊게 윤문할 때) | writing-enforcer (한국어 미지원), caveman (문장이 끊김) | 창업자 결정 2026-10-27, Skill Issues #9 |
+| 영어 문구 (랜딩, 홍보, 영어 문서) | writing-quality `writing-enforcer` | marketing-skills `copy-editing` (홍보 문구) | — | 창업자 결정 2026-10-27 |
 
 ## 2. 부딪히는 조합
 
@@ -40,6 +42,7 @@ last_reviewed: 2026-10-27
 | ponytail ↔ caveman `lean-build` | 같은 역할(과설계 방지) | 하나만 남긴다. 리포트로 비교 | 가설 |
 | 디자인 4종 (frontend-design, taste-skill, ui-ux-pro-max, impeccable) | 디자인 방향이 서로 다르고, 함께 발동할 수 있음 | 한 작업에 하나만. 위 표 기준 | 가설 |
 | caveman ↔ 창업자 보고 | 설명이 지나치게 짧아짐 | 허브 보고는 평소 말투로 쓴다 | 가설 |
+| caveman ↔ fluent-korean | 짧게 압축하라는 지시와 완결된 문장으로 쓰라는 지시가 정반대 | caveman은 유지하고, 한국어 답변은 writing-concise-korean(내용만 줄이고 조사·어미는 지킴)을 따른다. fluent-korean은 허브와 제품 저장소에서만 켠다 | 창업자 결정 2026-10-27, Skill Issues #10 |
 | impeccable 훅 ↔ UI 없는 작업 | 편집마다 실행, 답변 끝에 최대 30초 | 허브·백엔드 작업에서 느리면 끈다 | 가설 |
 | marketing(Anthropic) ↔ marketing-skills | 영역 중복 | 실행은 marketing-skills 우선. 첫 홍보 작업에서 비교해 하나만 남긴다 | 가설 |
 

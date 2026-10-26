@@ -5,14 +5,14 @@
     "url": "https://github.com/AidenLee0408"
   },
   "metadata": {
-    "description": "1인 사이드 프로젝트용 자작 Claude Code 스킬",
+    "description": "1인 사이드 프로젝트용 자체 제작 Claude Code 스킬",
     "version": "0.1.0"
   },
   "plugins": [
     {
       "name": "side-skills",
       "source": "./plugins/side-skills",
-      "description": "자작 스킬 묶음: 짧지만 문법이 깨지지 않는 한국어 답변, 한국어 문체 점검"
+      "description": "자체 제작 스킬 묶음: 짧지만 문법이 깨지지 않는 한국어 답변, 한국어 문체 점검"
     }
   ]
 }

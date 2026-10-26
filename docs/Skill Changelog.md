@@ -24,3 +24,11 @@ last_reviewed: 2026-10-27
 | 7 | 2026-10-27 | Skill Playbook 작업별 1순위 16개 | 1순위 지정 | 없음 → 첫 판 (랜딩 taste-skill, 제품 UI ui-ux-pro-max, 마케팅 실행 marketing-skills, 과설계 방지 ponytail 등) | 겹침 정리 | 가설 | 에이전트 제안 |
 | 8 | 2026-10-27 | 외부 서비스 연결 | 규칙 | 없음 → 플러그인 우선, 없으면 커넥터 | 중복 연결 방지 | DEC-001 | 창업자 |
 | 9 | 2026-10-27 | Caveman Cloud 스킬 (`caveman-setup`, `caveman-compress`) | 규칙 | 사용 가능 → 사용 금지 | 외부 전송 | Skill Issues #3 | 에이전트 제안 |
+| 10 | 2026-10-27 | 공개 문서 문장 | 규칙 | 없음 → UI Wording.md 공개 문서 규칙, 공개 전 writing-quality 점검, 주간 반영에 문장 점검 단계 | 초안 문장이 어색해 전체를 다시 다듬음 | 창업자 결정 | 창업자 |
+| 11 | 2026-10-27 | fluent-korean, humanize-korean (im-not-ai) | 설치 | 없음 → 시험 중 | 한국어 문체 개선 | Skill Issues #9 | 창업자 |
+| 12 | 2026-10-27 | 한국어 공개 문서 점검 | 1순위 변경 | writing-enforcer → fluent-korean(쓰기) + humanize-korean(공개 전 점검) | writing-enforcer가 한국어를 검사하지 못함 | Skill Issues #9 | 창업자 |
+| 13 | 2026-10-27 | writing-enforcer | 상태 변경 | 공개 문서 점검 → 영어 문구 점검 전용 | 영어 기준 패턴 | Skill Issues #9 | 창업자 |
+| 14 | 2026-10-27 | fluent-korean, humanize-korean | 상태 변경 | 모든 프로젝트 → 허브(프로젝트 범위)와 제품 저장소에서만 켬. 허브 출력 스타일 fluent-korean | 문서 작업과 제품에서만 쓰기로 함 | 창업자 결정 | 창업자 |
+| 15 | 2026-10-27 | writing-concise-korean, checking-korean-writing (side-skills) | 설치 | 없음 → 시험 중 (자체 제작 스킬, 모든 프로젝트) | 한국어판 caveman, 한국어판 writing-quality | Skill Issues #9, #10 | 창업자 |
+| 16 | 2026-10-27 | 한국어 공개 문서 점검 | 1순위 변경 | humanize-korean → checking-korean-writing (humanize-korean은 긴 글 보조) | 우리 규칙에 맞춘 점검과 스캐너 | 가설 | 에이전트 제안 |
+| 17 | 2026-10-27 | 문서 용어 | 규칙 | 자작 스킬 → 자체 제작 스킬 | 용어 정리 | 창업자 결정 | 창업자 |

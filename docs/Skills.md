@@ -44,7 +44,9 @@ last_reviewed: 2026-10-27
 | 플러그인 | 설치 경로 | 하는 일 | 설치 이유 | 상태 |
 |---|---|---|---|---|
 | **marketing-skills** 2.13.4 | 로컬 | 실행 스킬 52개: 가격, 결제 화면, 가입 흐름, CRO, 카피, 런칭, 디렉터리 등록, AI 검색 최적화, 콜드 메일 등 | 1인 SaaS 홍보 실행 | 시험 중 |
-| **writing-quality** | claude.ai | AI 문체 제거, 비즈니스 문서, 근거 없는 주장 점검 | 랜딩 문구와 문서 품질 | 시험 중 |
+| **writing-quality** | claude.ai | AI 문체 제거, 비즈니스 문서, 근거 없는 주장 점검. **영어 기준**이라 한국어는 잡지 못한다 | 영어 문구 점검 | 시험 중 (영어 전용) |
+| **fluent-korean** 1.0.0 | 로컬 | 출력 스타일. 조사·어미 빠뜨리기, 명사 이어 붙이기를 막아 처음부터 명확한 한국어로 쓰게 한다 | 한국어 문서가 어색하게 나오는 문제의 근본 대책 | 시험 중. **허브와 제품 저장소에서만 켬** (허브 `.claude/settings.json`에서 출력 스타일로 지정) |
+| **humanize-korean** 2.3.2 (im-not-ai) | 로컬 | AI가 쓴 한국어의 번역투와 기계적 문체를 찾아 다듬는다. 85개 패턴, 스킬 4개, 에이전트 9개 | 한국어 공개 문서의 공개 전 점검 (긴 글, 깊은 윤문) | 시험 중. **허브와 제품 저장소에서만 켬** |
 
 ## 5. 문서·도구
 
@@ -67,6 +69,15 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 | **playwright** | 브라우저 자동화·E2E 테스트 MCP (Microsoft) | 결제·가입 흐름 실제 테스트 | 공식 | 시험 중 |
 | **marketing** 1.2.0 | 콘텐츠, 캠페인, 브랜드 목소리, 성과 보고 (Anthropic) | 창업자 요청으로 설치. marketing-skills와 비교 | 공식 | 시험 중 (marketing-skills와 중복 비교) |
 
+## 7. 자체 제작 스킬 (side-toolkit)
+
+직접 만든 스킬은 공개 저장소 `products/side-toolkit`의 `plugins/side-skills/skills/`에 둔다. 플러그인 이름은 `side-skills`, 마켓플레이스 이름은 `side-toolkit`이다. 로컬 폴더를 마켓플레이스로 등록해 설치했으므로, 스킬을 고친 뒤에는 `claude plugin update side-skills@side-toolkit`을 실행해야 반영된다.
+
+| 스킬 | 하는 일 | 만든 이유 | 검증 | 상태 |
+|---|---|---|---|---|
+| **writing-concise-korean** | 한국어판 caveman. 내용은 줄이되 조사와 어미는 지켜, 짧아도 문장이 깨지지 않게 쓴다 | caveman을 유지하면서 한국어 답변이 명사 나열로 깨지는 문제를 막으려고 | 새 에이전트로 비교 시험은 아직 못 함 | 시험 중 (모든 프로젝트) |
+| **checking-korean-writing** | 한국어판 writing-quality. 명사 나열, 명사로 끝나는 문장, 빗금, 영어 직역, 번역투를 찾고(DETECT) 요청하면 고친다(REWRITE). 스캐너 `scan_korean.py` 포함 | writing-enforcer가 한국어를 검사하지 못해서 | 이 허브에서 손으로 고친 문장으로 시험: 고치기 전 문서에서 알려진 어색한 표현을 조사 오류 1건 빼고 모두 찾음 | 시험 중 (모든 프로젝트) |
+
 ## 겹침 지도 (2026-10-27)
 
 같은 일을 하는 플러그인이 여러 개 있다. 영역마다 **기본 담당**을 하나 두고, 나머지는 리포트로 비교한 뒤 남기거나 끈다. 작업별 순서는 [Skill Playbook](Skill%20Playbook.md)에 있다.
@@ -84,7 +95,8 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 | 마케팅 실행 | marketing-skills | marketing(Anthropic) | 하나만 남긴다 |
 | 경쟁 분석 | product-management `competitive-brief` | marketing(Anthropic) `competitive-brief`, marketing-skills `competitor-profiling` | — |
 | SEO | marketing-skills `seo-audit`, `ai-seo` | marketing(Anthropic) `seo-audit` | 보류 중인 claude-seo가 필요한가 |
-| 글 다듬기 | writing-quality | marketing-skills `copy-editing` | 랜딩 문구는 copy-editing, 문서는 writing-quality |
+| 한국어 글 | fluent-korean (쓰기 전, 허브·제품만) + checking-korean-writing (공개 전) | humanize-korean (긴 글 깊은 윤문) | caveman은 writing-concise-korean으로 보완 |
+| 영어 글 다듬기 | writing-quality | marketing-skills `copy-editing` | 랜딩 문구는 copy-editing, 그 밖의 영어 글은 writing-quality |
 | 브라우저 테스트 | playwright | 앱 내장 브라우저, taste-skill 검사기 | — |
 
 ### 부담이 큰 플러그인
@@ -110,6 +122,8 @@ Claude는 세션마다 스킬 설명을 모두 읽는다. 그래서 스킬이 �
 | taste-skill | Leonxlnx/taste-skill (MIT) | 12af471 | 훅 없음. 쓸 때 공개 이미지 모음에서 사진을 받음 |
 | impeccable | pbakaus/impeccable (Apache-2.0) | 989c484 | 훅 3개(SessionStart, Edit/Write 후, Stop 최대 30초). 처음 실행 때 GitHub 릴리스에서 엔진 바이너리를 받아 sha256 검증 |
 | marketing-skills | coreyhaines31/marketingskills (MIT) | f90b9d3 | 훅·MCP 없음, 스킬만 |
+| fluent-korean | snflkd/fluent-korean (MIT) | ce8683f | 출력 스타일 문서 2개뿐. 훅·MCP·스크립트 없음 |
+| humanize-korean | epoko77-ai/im-not-ai (MIT) | b37e020 | 스킬 4개, 에이전트 9개, 명령 4개. 훅·MCP 없음. 플러그인이 쓰는 부분에 외부 통신 없음 |
 | ponytail | DietrichGebert/ponytail (MIT) | 09c434a | 훅 3개, 로컬에서만 실행. 매 턴 기록을 `~/.config/ponytail/band/`에 CSV로 저장. 웹훅 비움. 기본 lite |
 
 ### 검토 후 제외

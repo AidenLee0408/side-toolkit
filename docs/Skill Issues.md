@@ -23,3 +23,7 @@ last_reviewed: 2026-10-27
 | 6 | 2026-10-27 | impeccable | 느림 | 편집마다 훅 실행, 답변 끝에 최대 30초 | UI 없는 작업에서 느리면 끈다. 첫 프로젝트에서 관찰 | 관찰 중 |
 | 7 | 2026-10-27 | 디자인 4종 (frontend-design, taste-skill, ui-ux-pro-max, impeccable) | 충돌 | 같은 작업에 서로 다른 미적 지시가 동시에 발동할 수 있음 | [Skill Playbook](Skill%20Playbook.md)에 작업별 1순위 지정. 첫 랜딩에서 비교 | 관찰 중 |
 | 8 | 2026-10-27 | marketing(Anthropic) ↔ marketing-skills | 충돌 | 마케팅 실행 영역 중복 | marketing-skills 우선. 첫 홍보 작업에서 하나만 남긴다 | 관찰 중 |
+| 9 | 2026-10-27 | writing-quality `writing-enforcer` | 품질 | 한국어를 검사하지 못한다. 어색했던 초안 문장(조사 오류, 명사 나열, 직역)을 스캐너에 넣었더니 10/10 "Ready to ship"이 나왔다. 패턴 목록이 영어 기준이다 | 한국어 공개 문서의 1순위 점검 도구를 다시 정한다 | 열림 |
+| 10 | 2026-10-27 | caveman ↔ fluent-korean | 충돌 | caveman은 답변을 짧게 압축하고 fluent-korean은 완결된 문장을 요구해 지시가 정반대다 | 한국어 글을 쓰는 세션에서는 caveman을 끈다. [Skill Playbook](Skill%20Playbook.md) 충돌 표에 반영 | 관찰 중 |
+| 11 | 2026-10-27 | writing-quality `writing-enforcer` | 품질 | #9 후속: 한국어 공개 문서 점검을 fluent-korean과 humanize-korean으로 옮기고, writing-enforcer는 영어 전용으로 둠 | [Skill Playbook](Skill%20Playbook.md), UI Wording 반영 | 해결 |
+| 12 | 2026-10-27 | caveman ↔ fluent-korean | 충돌 | #10 후속: caveman을 유지하기로 함 | 자체 제작 스킬 writing-concise-korean으로 한국어 답변 문법 보완, fluent-korean은 허브·제품에서만 켬 | 관찰 중 |
