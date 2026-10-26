@@ -7,7 +7,7 @@ last_reviewed: 2026-10-27
 
 # Skill Playbook
 
-작업마다 어떤 스킬을 먼저 쓰는지, 무엇이 서로 부딪히는지, 언제 스킬을 쓰지 않는지 적는다. 처음 판은 **가설**이다. `Skill Reports/`에 실제 결과가 쌓이면 고치고, 고친 근거(리포트 이름)를 적는다. 스킬 목록은 [[Skills]].
+작업마다 어떤 스킬을 먼저 쓰는지, 무엇이 서로 부딪히는지, 언제 스킬을 쓰지 않는지 적는다. 처음 판은 **가설**이다. `Skill Reports/`에 실제 결과가 쌓이면 고치고, 고친 근거(리포트 이름)를 적는다. 스킬 목록은 [Skills](Skills.md).
 
 ## 1. 작업별 우선순위
 
@@ -53,8 +53,8 @@ last_reviewed: 2026-10-27
 판단 기준: 스킬이 주는 절차나 지식이 없으면 결과가 나빠질 작업에만 쓴다.
 
 ## 4. 이 문서를 고치는 방법
-0. 작업 중 스킬 이슈가 생기면 바로 [[Skill Issues]]에 한 줄 추가한다.
+0. 작업 중 스킬 이슈가 생기면 바로 [Skill Issues](Skill%20Issues.md)에 한 줄 추가한다. 이 문서의 1순위·충돌 표나 [Skills](Skills.md)의 상태를 바꾸면 [Skill Changelog](Skill%20Changelog.md)에 한 줄 추가한다.
 1. 프로젝트(또는 큰 작업)를 마치면 `python3 scripts/skill-usage.py --root <저장소> --since <시작일>`로 사용 횟수를 뽑고, `Skill Reports/_Template.md`로 리포트를 쓴다.
 2. 주간 리뷰 때 새 리포트를 읽고, 같은 결과가 두 번 이상 나오면 위 표의 근거를 "가설"에서 리포트 이름으로 바꾼다.
-3. 스킬 상태(시험 중 → 채택/제외)는 [[Skills]]에서 바꾼다. 제외는 창업자가 정한다.
+3. 스킬 상태(시험 중 → 채택/제외)는 [Skills](Skills.md)에서 바꾼다. 제외는 창업자가 정한다.
 4. 월간 재검토 때 전체 집계(`python3 scripts/skill-usage.py --root ~/SideProjects --since <한 달 전>`)로 한 번도 안 쓴 플러그인을 찾아 끄기 후보로 올린다.

@@ -7,9 +7,9 @@ last_reviewed: 2026-10-27
 
 # Skills
 
-설치된 플러그인과 스킬 목록. 무엇인지, 왜 설치했는지, 지금 상태를 적는다. 언제 무엇을 먼저 쓰는지는 [[Skill Playbook]], 프로젝트에서 실제로 써 본 결과는 `Skill Reports/`에 둔다. 외부 서비스 연결(Stripe, Vercel 등)은 [[Integrations]]에 둔다.
+설치된 플러그인과 스킬 목록. 무엇인지, 왜 설치했는지, 지금 상태를 적는다. 언제 무엇을 먼저 쓰는지는 [Skill Playbook](Skill%20Playbook.md), 프로젝트에서 실제로 써 본 결과는 `Skill Reports/`에 둔다. 외부 서비스 연결(Stripe, Vercel 등)은 Integrations (운영 허브 문서)에 둔다.
 
-상태: 시험 중 / 채택 / 보류 / 제외. 프로젝트 리포트가 쌓이면 상태를 바꾼다.
+상태: 시험 중 / 채택 / 보류 / 꺼 둠 / 제외. 프로젝트 리포트가 쌓이면 상태를 바꾸고, 바꿀 때마다 [Skill Changelog](Skill%20Changelog.md)에 한 줄 남긴다.
 설치 경로: **claude.ai** = claude.ai 계정에서 켠 플러그인, **로컬** = `claude plugin install`로 설치(user 범위, 모든 프로젝트).
 
 ## 1. 개발 절차
@@ -56,7 +56,7 @@ last_reviewed: 2026-10-27
 
 ## 6. 외부 서비스·공식 마켓플레이스 (2026-10-27 로컬 설치)
 
-Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthropics/knowledge-work-plugins`)에서 설치했다. 공식 마켓플레이스가 커밋을 고정한다. 서비스 로그인은 아직 하지 않았다. 연결 규칙은 [[Integrations]].
+Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthropics/knowledge-work-plugins`)에서 설치했다. 공식 마켓플레이스가 커밋을 고정한다. 서비스 로그인은 아직 하지 않았다. 연결 규칙은 Integrations (운영 허브 문서).
 
 | 플러그인 | 무엇 | 설치 이유 | 검토 메모 | 상태 |
 |---|---|---|---|---|
@@ -69,7 +69,7 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 
 ## 겹침 지도 (2026-10-27)
 
-같은 일을 하는 플러그인이 여럿이다. 각 영역에 **기본 담당**을 하나 두고, 나머지는 리포트로 비교한 뒤 남기거나 끈다. 작업별 순서는 [[Skill Playbook]].
+같은 일을 하는 플러그인이 여럿이다. 각 영역에 **기본 담당**을 하나 두고, 나머지는 리포트로 비교한 뒤 남기거나 끈다. 작업별 순서는 [Skill Playbook](Skill%20Playbook.md).
 
 | 영역 | 기본 담당 | 겹치는 것 | 비교할 점 |
 |---|---|---|---|

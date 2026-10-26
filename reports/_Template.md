@@ -37,7 +37,7 @@ period: YYYY-MM-DD ~ YYYY-MM-DD
 - 같은 일에 두 스킬이 동시에 불린 경우:
 
 ## 5. 부딪힌 것
-이번 기간에 [[Skill Issues]]에 추가된 번호:
+이번 기간에 [Skill Issues](../docs/Skill%20Issues.md)에 추가된 번호:
 
 | 스킬 조합 | 증상 | 어떻게 처리했나 | 다음엔 |
 |---|---|---|---|
@@ -64,7 +64,7 @@ period: YYYY-MM-DD ~ YYYY-MM-DD
 - 공식 플러그인이 없어 커넥터를 쓴 서비스:
 
 ## 10. Playbook·Skills 반영 제안
-- [ ] [[Skill Playbook]] 1번 표: 어느 작업의 1순위를 무엇으로 바꿀지
-- [ ] [[Skill Playbook]] 2번 표: 새로 발견한 충돌
-- [ ] [[Skills]] 상태 변경: (시험 중 → 채택 / 제외 / 끄기)
+- [ ] [Skill Playbook](../docs/Skill%20Playbook.md) 1번 표: 어느 작업의 1순위를 무엇으로 바꿀지
+- [ ] [Skill Playbook](../docs/Skill%20Playbook.md) 2번 표: 새로 발견한 충돌
+- [ ] [Skills](../docs/Skills.md) 상태 변경: (시험 중 → 채택 / 제외 / 끄기)
 - [ ] 새로 찾아볼 스킬: (이번에 비어 있던 부분)
