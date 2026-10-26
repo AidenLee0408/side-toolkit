@@ -8,6 +8,7 @@
 |---|---|
 | [docs/Skills.md](docs/Skills.md) | 설치한 플러그인과 스킬 목록, 설치 이유, 상태, 겹침 지도, 오픈소스 검토 기록 |
 | [docs/Skill Playbook.md](docs/Skill%20Playbook.md) | 작업별 스킬 우선순위, 서로 부딪히는 조합, 스킬을 쓰지 않아도 되는 경우 |
+| [docs/Skill Changelog.md](docs/Skill%20Changelog.md) | 스킬 변경 이력. 설치, 삭제, 끄기, 1순위 변경 등을 한 줄씩 아래로 쌓음 |
 | [docs/Skill Issues.md](docs/Skill%20Issues.md) | 스킬·플러그인 이슈 로그. 한 줄씩 아래로 쌓음 |
 | [reports/](reports/) | 프로젝트별 스킬 사용 리포트. 양식은 [_Template.md](reports/_Template.md) |
 | [scripts/skill-usage.py](scripts/skill-usage.py) | Claude Code 대화 기록에서 스킬, 슬래시 명령, 서브에이전트, MCP 사용 횟수를 집계 |
