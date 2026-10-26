@@ -11,44 +11,45 @@ last_reviewed: 2026-10-27
 
 ## 1. 작업별 우선순위
 
-한 작업에는 주력 스킬을 하나만 둔다. 보조 스킬은 필요할 때만 부른다.
+한 작업에는 먼저 쓸 스킬을 하나만 정한다. 보조 스킬은 필요할 때만 부른다.
 
-| 작업 | 1순위 | 보조 | 쓰지 않는 것 | 근거 |
+| 작업 | 먼저 쓸 스킬 | 보조 스킬 | 쓰지 않을 스킬 | 근거 |
 |---|---|---|---|---|
-| 아이디어 고르기·검증 | product-management `brainstorm` | `deep-research`, `competitive-brief` | 개발 스킬 전부 | 가설 |
-| 기능 명세 | product-management `write-spec` | superpowers `brainstorming` | ponytail (범위를 너무 줄임) | 가설 |
-| 시장 전략·포지셔닝 | gtm-planner | marketing-skills `product-marketing` | marketing(Anthropic) 동시 사용 | 가설 |
-| 새 기능 구현 | superpowers `writing-plans` → `test-driven-development` | ponytail lite | caveman `lean-build` (ponytail과 중복) | 가설 |
+| 아이디어 고르기와 검증 | product-management `brainstorm` | `deep-research`, `competitive-brief` | 개발 스킬 전부 | 가설 |
+| 기능 명세 쓰기 | product-management `write-spec` | superpowers `brainstorming` | ponytail (범위를 지나치게 줄인다) | 가설 |
+| 시장 전략과 포지셔닝 | gtm-planner | marketing-skills `product-marketing` | marketing(Anthropic)을 함께 쓰는 것 | 가설 |
+| 새 기능 구현 | superpowers `writing-plans` → `test-driven-development` | ponytail lite | caveman `lean-build` (ponytail과 역할이 같다) | 가설 |
 | 버그 수정 | superpowers `systematic-debugging` | caveman `surgical-patch` | impeccable | 가설 |
 | 코드 정리 | `/simplify` | ponytail `ponytail-review` | — | 가설 |
-| 코드 리뷰 | `/code-review` | review-council (큰 변경만) | caveman-review와 동시 사용 | 가설 |
-| 랜딩 페이지 처음 만들기 | taste-skill | ui-ux-pro-max (색·폰트 데이터만) | impeccable, frontend-design 동시 사용 | 가설 |
-| 제품 UI(대시보드, 설정) | ui-ux-pro-max | frontend-design | taste-skill | 가설 |
-| UI 다듬기·점검 | impeccable `polish`/`audit` | — | 다른 디자인 스킬 | 가설 |
-| 랜딩 문구 | marketing-skills `copywriting` | writing-quality `writing-enforcer` | — | 가설 |
-| 가격·결제 화면 | marketing-skills `pricing`, `paywalls` | stripe 플러그인(설치 후) | — | 가설 |
-| 가입·온보딩 | marketing-skills `signup`, `onboarding` | — | — | 가설 |
+| 코드 리뷰 | `/code-review` | review-council (큰 변경일 때만) | caveman-review를 함께 쓰는 것 | 가설 |
+| 랜딩 페이지 처음 만들기 | taste-skill | ui-ux-pro-max (색과 폰트 데이터만) | impeccable, frontend-design을 함께 쓰는 것 | 가설 |
+| 제품 UI (대시보드, 설정 화면) | ui-ux-pro-max | frontend-design | taste-skill | 가설 |
+| UI 다듬기와 점검 | impeccable `polish`, `audit` | — | 다른 디자인 스킬 | 가설 |
+| 랜딩 페이지 문구 | marketing-skills `copywriting` | writing-quality `writing-enforcer` | — | 가설 |
+| 가격과 결제 화면 | marketing-skills `pricing`, `paywalls` | stripe 플러그인 (다시 켠 뒤) | — | 가설 |
+| 가입과 온보딩 | marketing-skills `signup`, `onboarding` | — | — | 가설 |
 | 런칭 | marketing-skills `launch`, `directory-submissions` | gtm-planner `roadmap` | — | 가설 |
 | 배포 전 점검 | engineering `deploy-checklist` | superpowers `verification-before-completion` | — | 가설 |
-| 허브 기록·문서 | 스킬 없음 | — | caveman (보고가 너무 짧아짐) | 가설 |
-| 한국어 공개 문서 (README, side-toolkit) | fluent-korean (출력 스타일로 쓰는 단계부터, 허브·제품만) → checking-korean-writing (공개 전 점검) | humanize-korean (긴 글을 깊게 윤문할 때) | writing-enforcer (한국어 미지원), caveman (문장이 끊김) | 창업자 결정 2026-10-27, Skill Issues #9 |
+| 허브 기록과 내부 문서 | 스킬 없이 한다 | — | caveman (보고가 지나치게 짧아진다) | 가설 |
+| 한국어 공개 문서 (README, side-toolkit) | fluent-korean으로 처음부터 쓰고(허브와 제품만), 공개 전에 checking-korean-writing으로 점검한다 | humanize-korean (긴 글을 깊게 다듬을 때) | writing-enforcer (한국어를 검사하지 못한다), caveman (문장이 끊긴다) | 창업자 결정 2026-10-27, Skill Issues #9 |
 | 영어 문구 (랜딩, 홍보, 영어 문서) | writing-quality `writing-enforcer` | marketing-skills `copy-editing` (홍보 문구) | — | 창업자 결정 2026-10-27 |
 
 ## 2. 부딪히는 조합
 
 | 조합 | 무엇이 부딪히나 | 처리 | 근거 |
 |---|---|---|---|
-| ponytail ↔ superpowers | "가장 작게"와 "계획·TDD 먼저" | 계획은 superpowers, 구현 범위 판단은 ponytail lite | 가설 |
-| ponytail ↔ caveman `lean-build` | 같은 역할(과설계 방지) | 하나만 남긴다. 리포트로 비교 | 가설 |
-| 디자인 4종 (frontend-design, taste-skill, ui-ux-pro-max, impeccable) | 디자인 방향이 서로 다르고, 함께 발동할 수 있음 | 한 작업에 하나만. 위 표 기준 | 가설 |
-| caveman ↔ 창업자 보고 | 설명이 지나치게 짧아짐 | 허브 보고는 평소 말투로 쓴다 | 가설 |
-| caveman ↔ fluent-korean | 짧게 압축하라는 지시와 완결된 문장으로 쓰라는 지시가 정반대 | caveman은 유지하고, 한국어 답변은 writing-concise-korean(내용만 줄이고 조사·어미는 지킴)을 따른다. fluent-korean은 허브와 제품 저장소에서만 켠다 | 창업자 결정 2026-10-27, Skill Issues #10 |
-| impeccable 훅 ↔ UI 없는 작업 | 편집마다 실행, 답변 끝에 최대 30초 | 허브·백엔드 작업에서 느리면 끈다 | 가설 |
-| marketing(Anthropic) ↔ marketing-skills | 영역 중복 | 실행은 marketing-skills 우선. 첫 홍보 작업에서 비교해 하나만 남긴다 | 가설 |
+| ponytail ↔ superpowers | "가장 작게 만들라"는 지시와 "계획과 테스트를 먼저 하라"는 지시 | 계획은 superpowers로 세우고, 구현 범위는 ponytail lite로 판단한다 | 가설 |
+| ponytail ↔ caveman `lean-build` | 둘 다 과설계를 막는 역할이다 | 리포트로 비교해 하나만 남긴다 | 가설 |
+| 디자인 플러그인 4개 (frontend-design, taste-skill, ui-ux-pro-max, impeccable) | 디자인 방향이 서로 다르고, 한 작업에서 함께 불릴 수 있다 | 한 작업에는 하나만 쓴다. 1번 표를 따른다 | 가설 |
+| caveman ↔ 창업자 보고 | 설명이 지나치게 짧아진다 | 허브 보고는 평소 말투로 쓴다 | 가설 |
+| caveman ↔ fluent-korean | 짧게 줄이라는 지시와 완결된 문장으로 쓰라는 지시가 정반대다 | caveman은 그대로 두고, 한국어 답변은 writing-concise-korean을 따른다(내용만 줄이고 조사와 어미는 지킨다). fluent-korean은 허브와 제품 저장소에서만 켠다 | 창업자 결정 2026-10-27, Skill Issues #10 |
+| impeccable 훅 ↔ UI가 없는 작업 | 파일을 고칠 때마다 훅이 실행되고, 답변 끝에 최대 30초가 걸린다 | 허브나 백엔드 작업에서 느려지면 끈다 | 가설 |
+| marketing(Anthropic) ↔ marketing-skills | 하는 일이 겹친다 | 실행은 marketing-skills를 먼저 쓴다. 첫 홍보 작업에서 비교해 하나만 남긴다 | 가설 |
 
 ## 3. 스킬을 쓰지 않아도 되는 경우
-- 한두 줄 수정, 오타, 이름 바꾸기
-- 질문에 답하기, 파일 몇 개 읽고 설명하기
+
+- 한두 줄 수정, 오타 고치기, 이름 바꾸기
+- 질문에 답하기, 파일 몇 개를 읽고 설명하기
 - 허브 기록 갱신(Kanban, Portfolio 등)
 - 이미 정해진 절차를 그대로 따르는 반복 작업
 - 스킬을 불렀더니 결과가 나빠지거나 느려진 작업 (리포트에 남긴다)
@@ -56,8 +57,9 @@ last_reviewed: 2026-10-27
 판단 기준: 스킬의 절차나 지식이 없으면 결과가 나빠지는 작업에만 쓴다.
 
 ## 4. 이 문서를 고치는 방법
-1. 작업 중 스킬 이슈가 생기면 바로 [Skill Issues](Skill%20Issues.md)에 한 줄 추가한다. 이 문서의 1순위·충돌 표나 [Skills](Skills.md)의 상태를 바꾸면 [Skill Changelog](Skill%20Changelog.md)에 한 줄 추가한다.
-2. 프로젝트(또는 큰 작업)를 마치면 `python3 scripts/skill-usage.py --root <저장소> --since <시작일>`로 사용 횟수를 뽑고, `Skill Reports/_Template.md`로 리포트를 쓴다.
-3. 주간 리뷰 때 새 리포트를 읽고, 같은 결과가 두 번 이상 나오면 위 표의 근거를 "가설"에서 리포트 이름으로 바꾼다.
-4. 스킬 상태(시험 중 → 채택/제외)는 [Skills](Skills.md)에서 바꾼다. 제외는 창업자가 정한다.
-5. 월간 재검토 때 전체 집계(`python3 scripts/skill-usage.py --root ~/SideProjects --since <한 달 전>`)로 한 번도 안 쓴 플러그인을 찾아 끄기 후보로 올린다.
+
+1. 작업 중에 스킬 이슈가 생기면 바로 [Skill Issues](Skill%20Issues.md)에 한 줄 추가한다. 이 문서의 우선순위나 충돌 표, 또는 [Skills](Skills.md)의 상태를 바꾸면 [Skill Changelog](Skill%20Changelog.md)에 한 줄 추가한다.
+2. 프로젝트나 큰 작업을 마치면 `python3 scripts/skill-usage.py --root <저장소> --since <시작일>`로 사용 횟수를 뽑고, `Skill Reports/_Template.md`로 리포트를 쓴다.
+3. 주간 리뷰 때 새 리포트를 읽는다. 같은 결과가 두 번 이상 나오면 위 표의 근거를 "가설"에서 리포트 이름으로 바꾼다.
+4. 스킬 상태(시험 사용 → 채택 또는 제외)는 [Skills](Skills.md)에서 바꾼다. 제외는 창업자가 정한다.
+5. 월간 재검토 때 전체 집계(`python3 scripts/skill-usage.py --root ~/SideProjects --since <한 달 전>`)로 한 번도 쓰지 않은 플러그인을 찾아 사용 중지 후보로 올린다.

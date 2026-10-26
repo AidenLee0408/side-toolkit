@@ -6,7 +6,7 @@ description: Use when Korean prose others will read (README, docs, release notes
 # Checking Korean Writing
 
 ## Overview
-A Korean counterpart to writing-quality. Reads Korean prose for the patterns that make agent-written Korean feel broken: dropped particles, noun strings, noun-ending sentences, slash lists, and translationese. Meaning never changes; only wording does.
+A Korean counterpart to writing-quality. Reads Korean prose for the patterns that make agent-written Korean feel broken: dropped particles, noun strings, noun-ending sentences, clipped coined labels, slash lists, and translationese. Meaning never changes; only wording does.
 
 ## Modes
 - **DETECT** (default): list findings with line, pattern, and suggested direction. Do not edit.
@@ -16,7 +16,7 @@ A Korean counterpart to writing-quality. Reads Korean prose for the patterns tha
 1. Decide the reader: public text gets full sentences; internal tables may stay short.
 2. Run the scanner for evidence: `python3 scripts/scan_korean.py FILE` (`--json` for machine output). Hits are candidates, not verdicts.
 3. Read every hit in context. Drop false positives (short table labels, proper nouns).
-4. Read the prose once more yourself for what regex cannot see: wrong particles (`이슈를 생길 때` → `이슈가 생길 때`), mixed 합니다/한다 style, sentences carrying several actions.
+4. Read the prose once more yourself for what regex cannot see: wrong particles (`이슈를 생길 때` → `이슈가 생길 때`), mixed 합니다/한다 style, sentences carrying several actions, and coined shorthand terms that a first-time reader would not understand.
 5. DETECT: report a table `줄 | 패턴 | 원문 | 고칠 방향`. REWRITE: apply edits, rerun the scanner, report before/after counts.
 
 ## Patterns
@@ -31,6 +31,8 @@ A Korean counterpart to writing-quality. Reads Korean prose for the patterns tha
 | 빗금으로 잇기 | 추가 / 수정 / 삭제 | 추가, 수정, 삭제 |
 | 번역투 | ~을 통해, ~에 있어서, 되어지다, ~것이 가능하다 | ~로, ~에서, 되다, ~할 수 있다 |
 | 줄표 | A — B | 쉼표나 문장 나누기 |
+| 줄여 만든 용어 | 꺼 둠, 겹침 지도, 기본 담당, 주력 | 사용 중지, 기능이 겹치는 플러그인, 먼저 쓸 스킬 |
+| 명사형(~ㅁ)으로 끝내기 | 설치함, 결제 붙일 때 켬 | 설치했다, 결제를 붙일 때 다시 켠다 |
 
 ## Boundaries
 - Keep code, commands, paths, links, tables' structure, quotes, and frontmatter unchanged.

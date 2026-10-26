@@ -28,6 +28,15 @@ TRANSLATIONESE = [
     (r"\b(그|이) (것|점)은 [^.]{0,20}(이다|입니다)", "강조 구문 (It is ~ that)", "주어를 바로 쓴다"),
 ]
 CALQUES = ["처음 판", "미적 지시", "최종 판", "다관점", "동시 발동"]
+# Clipped labels: coined status words and jargon that read like shorthand.
+CLIPPED = ["꺼 둠", "켜 둠", "꺼 둔", "켜 둔", "겹침 지도", "기본 담당", "주력", "시험 중"]
+
+
+def ends_in_nominal_m(word):
+    """True for a short word ending in a verb nominalized with ㅁ (함, 됨, 둠, 켬)."""
+    word = re.sub(r"[^가-힣]", "", word)
+    # Only verb nominalizations; nouns that happen to end in ㅁ (점검, 시점) are fine.
+    return bool(word) and len(word) <= 4 and word[-1] in "함됨둠켬끔짐큼씀줌봄옴"
 NOUN_SUFFIX = re.compile(r"(방지|기록용|점검용|확인용|잡기|정리|관리|처리|적용|지정|개선|확인|검토|설치|사용|진행)$")
 
 
@@ -77,6 +86,12 @@ def scan(path):
             for c in CALQUES:
                 if c in clean:
                     hits.append((no, "영어 직역", c, "한국어로 풀어 쓴다"))
+            for c in CLIPPED:
+                if c in clean:
+                    hits.append((no, "줄여 만든 용어", c, "뜻이 바로 보이는 말로 바꾼다 (예: 꺼 둠 → 사용 중지)"))
+            tail = re.sub(r"[.!?…)\"'”’:]+$", "", clean).split()
+            if tail and ends_in_nominal_m(tail[-1]) and not any(c in clean for c in CLIPPED):
+                hits.append((no, "명사형(~ㅁ)으로 끝남", clean[-30:], "~한다, ~합니다로 끝내거나 상태 이름을 쓴다"))
             for m in re.finditer(r"[가-힣]+\s?/\s?[가-힣]+(\s?/\s?[가-힣]+)*", clean):
                 if t is body:
                     hits.append((no, "빗금으로 잇기", m.group(0), "쉼표나 '또는'으로 쓴다"))
