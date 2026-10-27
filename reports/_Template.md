@@ -1,5 +1,5 @@
 ---
-type: skill-report
+type: plugin-report
 status: proposed
 date: YYYY-MM-DD
 product: <제품 또는 작업>
@@ -7,7 +7,7 @@ repo: <저장소 경로>
 period: YYYY-MM-DD ~ YYYY-MM-DD
 ---
 
-# Skill Report — <제품/작업> YYYY-MM-DD
+# Plugin Report — <제품/작업> YYYY-MM-DD
 
 리포트는 세 단계로 쓴다. 먼저 집계 스크립트로 숫자를 뽑고, 단계별로 평가한 뒤, Playbook에 반영할 제안을 쓴다. 근거가 되는 숫자가 없으면 `unknown`이라고 적는다.
 
@@ -37,7 +37,7 @@ period: YYYY-MM-DD ~ YYYY-MM-DD
 - 같은 일에 두 스킬이 동시에 불린 경우:
 
 ## 5. 부딪힌 것
-이번 기간에 [Skill Issues](../docs/Skill%20Issues.md)에 추가한 번호:
+이번 기간에 [Plugin Issues](../docs/Plugin%20Issues.md)에 추가한 번호:
 
 | 스킬 조합 | 증상 | 처리한 방법 | 다음에는 |
 |---|---|---|---|
@@ -63,8 +63,8 @@ period: YYYY-MM-DD ~ YYYY-MM-DD
 - 플러그인과 커넥터가 겹친 곳:
 - 공식 플러그인이 없어 커넥터를 쓴 서비스:
 
-## 10. Playbook과 Skills에 반영할 제안
-- [ ] [Skill Playbook](../docs/Skill%20Playbook.md) 1번 표: 어느 작업에서 먼저 쓸 스킬을 무엇으로 바꿀지
-- [ ] [Skill Playbook](../docs/Skill%20Playbook.md) 2번 표: 새로 발견한 충돌
-- [ ] [Skills](../docs/Skills.md) 상태 변경: (시험 사용에서 채택, 제외, 사용 중지 중 무엇으로 바꿀지)
+## 10. Playbook과 Plugins에 반영할 제안
+- [ ] [Plugin Playbook](../docs/Plugin%20Playbook.md) 1번 표: 어느 작업에서 먼저 쓸 스킬을 무엇으로 바꿀지
+- [ ] [Plugin Playbook](../docs/Plugin%20Playbook.md) 2번 표: 새로 발견한 충돌
+- [ ] [Plugins](../docs/Plugins.md) 상태 변경: (시험 사용에서 채택, 제외, 사용 중지 중 무엇으로 바꿀지)
 - [ ] 새로 찾아볼 스킬: (이번 작업에서 도와줄 스킬이 없던 부분)

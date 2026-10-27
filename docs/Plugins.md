@@ -1,13 +1,28 @@
 ---
-type: skills-catalog
+type: plugins-catalog
 status: proposed
 owner: Founder
 last_reviewed: 2026-10-27
 ---
 
-# Skills
+# Plugins
 
-설치한 플러그인과 스킬을 정리한다. 각각 무엇을 하는지, 왜 설치했는지, 지금 어떤 상태인지 적는다. 작업별로 무엇을 먼저 쓰는지는 [Skill Playbook](Skill%20Playbook.md)에, 프로젝트에서 써 본 결과는 `Skill Reports/`에 둔다. 외부 서비스 연결(Stripe, Vercel 등)은 Integrations (운영 허브 문서)에 둔다.
+설치한 플러그인을 정리한다. 각각 무엇을 하는지, 왜 설치했는지, 지금 어떤 상태인지 적는다. 작업별로 무엇을 먼저 쓰는지는 [Plugin Playbook](Plugin%20Playbook.md)에, 프로젝트에서 써 본 결과는 `Plugin Reports/`에 둔다. 외부 서비스 연결(Stripe, Vercel 등)은 Integrations (운영 허브 문서)에 둔다.
+
+**플러그인에 들어 있는 것**
+
+플러그인 하나에 아래 구성 요소가 함께 들어 있을 수 있다. 검토할 때는 스킬만 보지 않고 모두 본다. 훅은 부르지 않아도 실행되고, MCP는 외부와 통신하기 때문이다.
+
+| 구성 요소 | 하는 일 |
+|---|---|
+| 스킬 | 상황에 맞으면 Claude가 불러 쓰는 지시서 |
+| 명령 | 사람이 `/이름`으로 직접 부르는 기능 |
+| 에이전트 | 특정 일을 맡는 별도 Claude |
+| 훅 | 세션 시작, 메시지 입력, 파일 수정 후 같은 시점마다 자동으로 실행되는 명령. 대화에 지시를 끼워 넣을 수 있다 |
+| MCP 서버 | 외부 서비스나 로컬 프로그램에 연결하는 도구 |
+| 출력 스타일 | 답변 방식 전체를 바꾸는 지시 |
+
+플러그인마다 실제로 무엇이 들어 있는지는 `python3 scripts/plugin-audit.py inventory`로 뽑는다. 손으로 적은 표와 실제 설치 상태가 어긋나지 않게, 구성 요소 수와 훅, MCP 목록은 이 명령의 결과를 기준으로 한다. 새 플러그인을 검토하는 순서는 [Plugin Review](Plugin%20Review.md)에 있다.
 
 **상태**는 다섯 가지다.
 
@@ -19,7 +34,7 @@ last_reviewed: 2026-10-27
 | 사용 중지 | 설치는 그대로 두고 꺼 두었다. 필요할 때 다시 켠다 |
 | 제외 | 검토한 뒤 쓰지 않기로 했다 |
 
-상태를 바꿀 때마다 [Skill Changelog](Skill%20Changelog.md)에 한 줄 남긴다.
+상태를 바꿀 때마다 [Plugin Changelog](Plugin%20Changelog.md)에 한 줄 남긴다.
 
 **설치 경로**는 두 가지다. **claude.ai**는 claude.ai 계정에서 켠 플러그인이고, **로컬**은 `claude plugin install`로 설치한 플러그인이다. 로컬 플러그인은 따로 적지 않으면 모든 프로젝트에 적용된다.
 
@@ -80,7 +95,7 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 | **playwright** | 브라우저 자동화와 E2E 테스트 MCP (Microsoft) | 결제와 가입 흐름을 실제 브라우저로 시험하려고 | 공식 플러그인 | 시험 사용 |
 | **marketing** 1.2.0 | 콘텐츠, 캠페인, 브랜드 목소리, 성과 보고 (Anthropic) | 창업자 요청으로 설치했다. marketing-skills와 비교한다 | 공식 플러그인 | 시험 사용 (marketing-skills와 비교 중) |
 
-## 7. 자체 제작 스킬 (side-toolkit)
+## 7. 자체 제작 플러그인 (side-toolkit)
 
 직접 만든 스킬은 공개 저장소 `products/side-toolkit`의 `plugins/side-skills/skills/`에 둔다. 플러그인 이름은 `side-skills`, 마켓플레이스 이름은 `side-toolkit`이다. 로컬 폴더를 마켓플레이스로 등록해 설치했으므로, 스킬을 고친 뒤에는 버전을 올리고 `claude plugin update side-skills@side-toolkit`을 실행해야 반영된다.
 
@@ -89,9 +104,34 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 | **writing-concise-korean** | 한국어판 caveman이다. 내용은 줄이되 조사와 어미는 지켜서, 짧게 써도 문장이 깨지지 않게 한다 | caveman을 쓰면서도 한국어 답변이 명사 나열로 깨지지 않게 하려고 | 스킬이 있을 때와 없을 때를 비교하는 시험은 아직 하지 못했다 | 시험 사용 (모든 프로젝트) |
 | **checking-korean-writing** | 한국어판 writing-quality다. 명사 나열, 명사로 끝나는 문장, 빗금, 영어 직역, 번역투를 찾아 알려 주고(DETECT), 요청하면 고친다(REWRITE). 스캐너 `scan_korean.py`가 들어 있다 | writing-enforcer가 한국어를 검사하지 못해서 | 이 허브에서 손으로 고쳤던 문서의 수정 전 버전으로 시험했다. 알려진 어색한 표현을 조사 오류 1건만 빼고 모두 찾았다 | 시험 사용 (모든 프로젝트) |
 
+## 폴더별로 켜지는 플러그인
+
+`python3 scripts/plugin-audit.py scope --projects ~/SideProjects/hub ~`로 뽑은 결과를 요약했다. 제품 저장소를 만들면 그 폴더도 추가한다.
+
+| 플러그인 | 허브 | 그 밖의 폴더 |
+|---|---|---|
+| fluent-korean, humanize-korean | 켜짐 (출력 스타일 fluent-korean) | 꺼짐 |
+| posthog, cloudflare, stripe | 꺼짐 | 꺼짐 |
+| 나머지 19개 | 켜짐 | 켜짐 |
+
+제품 저장소에서는 한국어 문체 플러그인 2개를 프로젝트 범위로 켜고, 결제·배포·분석 플러그인은 필요해지면 그 저장소에서만 켠다.
+
+## 여러 플러그인이 함께 연결하는 MCP 서버
+
+`plugin-audit.py conflicts`의 5번 결과다. claude.ai 플러그인 4개(engineering, product-management, marketing, gtm-planner)가 같은 서비스를 각자 연결한다. 지금은 모두 로그인하지 않아 실제로 쓰이지는 않는다. 한 서비스를 실제로 쓰게 되면 하나의 플러그인에서만 로그인한다(DEC-001 외부 서비스 연결은 플러그인 우선 (운영 허브 문서)).
+
+| 서비스 | 연결하는 플러그인 |
+|---|---|
+| Notion | engineering, gtm-planner, marketing, product-management |
+| Slack, Gmail, Google Calendar | engineering, marketing, product-management |
+| Similarweb | gtm-planner, marketing, product-management |
+| Ahrefs, HubSpot | gtm-planner, marketing |
+| Amplitude, Figma | marketing, product-management |
+| Asana, Atlassian, Linear | engineering, product-management |
+
 ## 기능이 겹치는 플러그인 (2026-10-27)
 
-같은 일을 하는 플러그인이 여러 개 있다. 영역마다 **기본으로 쓸 플러그인**을 하나 정하고, 나머지는 리포트로 비교한 뒤 남기거나 끈다. 작업별 순서는 [Skill Playbook](Skill%20Playbook.md)에 있다.
+같은 일을 하는 플러그인이 여러 개 있다. 영역마다 **기본으로 쓸 플러그인**을 하나 정하고, 나머지는 리포트로 비교한 뒤 남기거나 끈다. 작업별 순서는 [Plugin Playbook](Plugin%20Playbook.md)에 있다.
 
 | 영역 | 기본으로 쓸 것 | 겹치는 것 | 비교할 점 |
 |---|---|---|---|

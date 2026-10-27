@@ -1,9 +1,9 @@
 # side-toolkit
 
-> 1인 개발자가 Claude Code로 사이드 프로젝트를 만들면서 쓰는 **플러그인과 스킬 기록**입니다.
-> 어떤 플러그인을 왜 골랐는지, 작업별로 어떤 스킬을 쓰는지, 실제로 써 보니 어땠는지 정리합니다.
+> 1인 개발자가 Claude Code로 사이드 프로젝트를 만들면서 쓰는 **플러그인 관리 기록**입니다.
+> 어떤 플러그인을 왜 골랐는지, 그 안의 스킬과 훅과 MCP가 무엇을 하는지, 작업별로 어떤 스킬을 쓰는지, 실제로 써 보니 어땠는지 정리합니다.
 
-**English:** Notes from a solo developer on the Claude Code plugins and skills used to build side projects: what was chosen and why, which skill fits each task, and how each one held up in real work. The docs are written in Korean.
+**English:** Notes from a solo developer on managing Claude Code plugins for side projects: what was chosen and why, what each plugin bundles (skills, hooks, MCP servers, agents, commands, output styles), which skill fits each task, and how each one held up in real work. The docs are written in Korean.
 
 <br>
 
@@ -16,7 +16,7 @@
 | 사용 중지한 플러그인 | 3개 (posthog, cloudflare, stripe). 필요해지면 다시 켭니다 |
 | 검토 후 제외한 플러그인 | 8개 |
 | 사용 기준을 정한 작업 | 18개 |
-| 변경 이력과 이슈 기록 | [Changelog](docs/Skill%20Changelog.md), [Issues](docs/Skill%20Issues.md) |
+| 변경 이력과 이슈 기록 | [Changelog](docs/Plugin%20Changelog.md), [Issues](docs/Plugin%20Issues.md) |
 
 마지막으로 갱신한 날은 2026-10-27이며, 매주 갱신합니다.
 
@@ -26,17 +26,18 @@
 
 | 문서 | 이럴 때 보세요 |
 |---|---|
-| 📦 [**Skills**](docs/Skills.md) | 어떤 플러그인을 왜 설치했는지, 지금 상태는 어떤지, 기능이 겹치는 것은 무엇인지 궁금할 때 |
-| 🧭 [**Skill Playbook**](docs/Skill%20Playbook.md) | "이 작업엔 어떤 스킬을 먼저 쓰지?" 할 때 |
-| 📝 [**Skill Changelog**](docs/Skill%20Changelog.md) | 설치, 사용 중지, 우선순위 변경처럼 무엇이 언제 왜 바뀌었는지 볼 때 |
-| ⚠️ [**Skill Issues**](docs/Skill%20Issues.md) | 어떤 문제가 있었고 어떻게 처리했는지 볼 때 |
+| 📦 [**Plugins**](docs/Plugins.md) | 어떤 플러그인을 왜 설치했는지, 안에 무엇이 들어 있는지, 지금 상태와 기능이 겹치는 것이 궁금할 때 |
+| 🔍 [**Plugin Review**](docs/Plugin%20Review.md) | 새 플러그인이나 업데이트를 어떤 순서로 검토하는지 볼 때 |
+| 🧭 [**Plugin Playbook**](docs/Plugin%20Playbook.md) | "이 작업엔 어떤 스킬을 먼저 쓰지?" 할 때 |
+| 📝 [**Plugin Changelog**](docs/Plugin%20Changelog.md) | 설치, 사용 중지, 우선순위 변경처럼 무엇이 언제 왜 바뀌었는지 볼 때 |
+| ⚠️ [**Plugin Issues**](docs/Plugin%20Issues.md) | 어떤 문제가 있었고 어떻게 처리했는지 볼 때 |
 | 📊 [**Reports**](reports/) | 실제 프로젝트에서 써 본 결과를 볼 때. 양식은 [_Template](reports/_Template.md)에 있습니다 |
 
 <br>
 
 ## 영역별로 먼저 쓰는 스킬
 
-한 작업에는 먼저 쓸 스킬을 하나만 정합니다. 자세한 기준과 근거는 [Playbook](docs/Skill%20Playbook.md)에 있습니다.
+한 작업에는 먼저 쓸 스킬을 하나만 정합니다. 자세한 기준과 근거는 [Playbook](docs/Plugin%20Playbook.md)에 있습니다.
 
 | 영역 | 먼저 쓰는 스킬 | 함께 비교하는 스킬 |
 |---|---|---|
@@ -75,21 +76,21 @@
 
 ```mermaid
 flowchart LR
-    A[후보 발견] --> B[코드 검토<br/>훅 · 외부 통신 · 라이선스]
+    A[후보 발견] --> B[검토<br/>스킬 · 훅 · MCP · 외부 통신 · 라이선스]
     B -->|통과| C[설치<br/>시험 사용]
     B -->|탈락| X[제외]
     C --> D[프로젝트에서 사용]
-    D --> E[이슈 기록<br/>Skill Issues]
+    D --> E[이슈 기록<br/>Plugin Issues]
     D --> F[리포트<br/>Reports]
-    E --> G[결정 변경<br/>Skill Changelog]
+    E --> G[결정 변경<br/>Plugin Changelog]
     F --> G
-    G --> H[기준 갱신<br/>Skills · Playbook]
+    G --> H[기준 갱신<br/>Plugins · Playbook]
     H --> D
 ```
 
 **규칙**
 
-1. **설치하기 전에 검토합니다.** 오픈소스는 설정 파일, 훅, 외부로 데이터를 보내는 코드, 라이선스를 읽고, 검토한 커밋을 기록합니다.
+1. **설치하기 전에 검토합니다.** 스킬만 보지 않고 훅, MCP, 에이전트, 명령까지 모두 엽니다. 순서는 [Plugin Review](docs/Plugin%20Review.md)에 있고, 검토한 버전과 커밋은 [plugin-reviews.json](plugin-reviews.json)에 기록합니다.
 2. **한 서비스는 한 번만 연결합니다.** 공식 플러그인이 있으면 플러그인을, 없으면 커넥터(MCP)를 씁니다.
 3. **많이 설치하지 않습니다.** 스킬이 많을수록 토큰을 더 쓰고 엉뚱한 스킬이 불립니다. 지금 단계에 필요 없는 플러그인은 사용을 중지합니다.
 4. **검증되지 않은 기준은 가설로 표시합니다.** Playbook의 기준은 실제 리포트가 두 번 이상 뒷받침하기 전까지 `가설`입니다.
@@ -110,24 +111,32 @@ python3 scripts/skill-usage.py --root ~/SideProjects --since 2026-11-01
 
 <br>
 
-## 스킬 충돌 검사
+## 플러그인 점검 스크립트
 
-Claude는 켜진 스킬의 설명을 모두 읽고 무엇을 부를지 고릅니다. 여러 플러그인이 같은 일을 맡으면 엉뚱한 스킬이 불리므로, 플러그인을 설치하거나 업데이트할 때마다 충돌 후보를 뽑아 봅니다.
+`scripts/plugin-audit.py`는 이 컴퓨터에 설치된 플러그인을 네 가지로 점검합니다.
+
+| 명령 | 하는 일 |
+|---|---|
+| `inventory` | 플러그인마다 스킬, 명령, 에이전트, 훅, MCP 서버, 출력 스타일을 표로 보여 줍니다. 훅이 실행하는 명령과 MCP의 연결 주소도 함께 나옵니다 |
+| `conflicts` | 이름이 같은 스킬, 같은 일을 맡는 스킬, 설명이 많이 겹치는 스킬, 같은 시점에 지시를 넣는 훅, 여러 플러그인이 함께 연결하는 MCP 서버를 후보로 뽑습니다 |
+| `drift` | 설치된 버전과 커밋이 검토 기록(`plugin-reviews.json`)과 다른 플러그인을 찾습니다. 검토하지 않은 업데이트를 잡아냅니다 |
+| `scope` | 폴더마다 어떤 플러그인이 켜지는지 비교합니다 |
 
 ```bash
-python3 scripts/skill-conflicts.py --project ~/SideProjects/hub
+python3 scripts/plugin-audit.py inventory --project ~/SideProjects/hub
+python3 scripts/plugin-audit.py conflicts --project ~/SideProjects/hub
+python3 scripts/plugin-audit.py drift --reviews plugin-reviews.json
+python3 scripts/plugin-audit.py scope --projects ~/SideProjects/hub ~
 ```
 
-- 이름이 같은 스킬, 같은 일을 맡는 스킬(주제별), 설명이 많이 겹치는 스킬 쌍을 보여 줍니다.
-- 세션 시작이나 메시지 입력 때마다 지시를 넣는 훅과 출력 스타일도 함께 보여 줍니다.
-- 결과는 후보일 뿐입니다. 실제로 부딪히는지는 사람이 보고 [Playbook](docs/Skill%20Playbook.md)에 정합니다. 첫 검사 결과는 [리포트](reports/2026-10-27%20%EC%8A%A4%ED%82%AC%20%EC%B6%A9%EB%8F%8C%20%EA%B2%80%EC%82%AC.md)에 있습니다.
+결과는 후보일 뿐입니다. 실제로 부딪히는지는 사람이 보고 [Playbook](docs/Plugin%20Playbook.md)에 정합니다. 첫 충돌 검사 결과는 [리포트](reports/2026-10-27%20%EC%B6%A9%EB%8F%8C%20%EA%B2%80%EC%82%AC.md)에 있습니다.
 
 <br>
 
 ## 내 환경에 가져다 쓰기
 
-- 플러그인 목록과 검토 메모는 [Skills](docs/Skills.md)의 표를 참고하면 됩니다. 설치 명령은 각 저장소의 README를 따르세요.
-- 리포트 양식([_Template](reports/_Template.md))과 집계 스크립트는 다른 프로젝트에서도 그대로 쓸 수 있습니다.
+- 플러그인 목록과 검토 메모는 [Plugins](docs/Plugins.md)의 표를 참고하면 됩니다. 설치 명령은 각 저장소의 README를 따르세요.
+- 리포트 양식([_Template](reports/_Template.md)), 검토 순서([Plugin Review](docs/Plugin%20Review.md)), 점검 스크립트는 다른 프로젝트에서도 그대로 쓸 수 있습니다.
 - 문서 안의 "(운영 허브 문서)" 표시는 공개하지 않은 개인 운영 문서를 가리킵니다.
 
 <br>

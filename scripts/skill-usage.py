@@ -4,7 +4,7 @@
 Reads ~/.claude/projects/*/*.jsonl and keeps only sessions whose working
 directory is under --root (default: $SKILL_USAGE_ROOT, else the current
 directory), so sessions from unrelated work are never counted. Prints
-Markdown tables for a Skill Report.
+Markdown tables for a Plugin Report.
 
 Usage:
   python3 scripts/skill-usage.py --root ~/SideProjects        # every side project
