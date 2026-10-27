@@ -28,7 +28,8 @@
 
 | 문서 | 이럴 때 보세요 |
 |---|---|
-| 📦 [**Plugins**](docs/Plugins.md) | 어떤 플러그인을 왜 설치했는지, 안에 무엇이 들어 있는지, 지금 상태와 기능이 겹치는 스킬이 궁금할 때 |
+| 📦 [**Plugins**](docs/Plugins.md) | 어떤 플러그인을 왜 설치했는지, 지금 상태는 어떤지, 기능이 겹치는 스킬은 무엇인지 궁금할 때 |
+| 🧩 [**Plugin Components**](docs/Plugin%20Components.md) | 플러그인마다 어떤 스킬, 명령, 에이전트, 훅, MCP 서버가 들어 있는지 볼 때. 스킬 설명과 훅이 하는 일이 함께 나옵니다 |
 | 🔍 [**Plugin Review**](docs/Plugin%20Review.md) | 새 플러그인이나 업데이트를 어떤 순서로 검토하는지 볼 때 |
 | 🧭 [**Plugin Playbook**](docs/Plugin%20Playbook.md) | "이 작업엔 어떤 스킬을 먼저 쓰지?" 할 때 |
 | 📝 [**Plugin Changelog**](docs/Plugin%20Changelog.md) | 설치, 사용 중지, 우선순위 변경처럼 무엇이 언제 왜 바뀌었는지 볼 때 |
@@ -106,6 +107,7 @@ flowchart LR
 
 | 명령 | 하는 일 |
 |---|---|
+| `components` | 플러그인마다 들어 있는 스킬, 명령, 에이전트, 훅, MCP 서버를 설명과 함께 나열합니다. [Plugin Components](docs/Plugin%20Components.md) 문서를 이 명령으로 만듭니다 |
 | `inventory` | 플러그인마다 스킬, 명령, 에이전트, 훅, MCP 서버, 출력 스타일을 표로 보여 줍니다. 훅이 실행하는 명령과 MCP의 연결 주소도 함께 나옵니다 |
 | `conflicts` | 이름이 같은 스킬, 같은 일을 맡는 스킬, 설명이 많이 겹치는 스킬, 같은 시점에 지시를 넣는 훅, 여러 플러그인이 함께 연결하는 MCP 서버를 후보로 뽑습니다 |
 | `drift` | 설치된 버전과 커밋이 검토 기록(`plugin-reviews.json`)과 다른 플러그인을 찾습니다. 검토하지 않은 업데이트를 잡아냅니다 |

@@ -57,6 +57,8 @@ last_reviewed: 2026-10-27
 ## 7. 기록한다
 
 - [Plugins](Plugins.md): 하는 일, 설치 이유, 상태, 검토 메모
+- `plugin-reviews.json`의 `hooks`: 훅마다 하는 일을 한 줄로 적는다
+- [Plugin Components](Plugin%20Components.md): `python3 scripts/plugin-audit.py components > "Plugin Components.md"`로 다시 만든다
 - `plugin-reviews.json`: 버전, 커밋, 검토 날짜, 검토 근거
 - [Plugin Changelog](Plugin%20Changelog.md): 설치 기록 한 줄
 - 문제를 찾았으면 [Plugin Issues](Plugin%20Issues.md)에 한 줄

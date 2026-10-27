@@ -131,13 +131,14 @@ last_reviewed: 2026-10-27
 - 실제 작업에서 놓친 패턴이 보이면 [Plugin Issues](Plugin%20Issues.md)에 남기고 스킬에 추가한다.
 
 **공개 저장소 반영**
-- 플러그인 문서(`Plugins.md`, `Plugin Review.md`, `Plugin Playbook.md`, `Plugin Changelog.md`, `Plugin Issues.md`, `Plugin Reports/`, `plugin-reviews.json`, `scripts/plugin-audit.py`)는 허브가 원본이다. 평소에는 허브에서만 고친다.
+- 플러그인 문서(`Plugins.md`, `Plugin Components.md`, `Plugin Review.md`, `Plugin Playbook.md`, `Plugin Changelog.md`, `Plugin Issues.md`, `Plugin Reports/`, `plugin-reviews.json`, `scripts/plugin-audit.py`)는 허브가 원본이다. 평소에는 허브에서만 고친다.
 - 공개 저장소 `products/side-toolkit`에는 주간 점검 때 한 번에 반영한다. 공개 저장소이므로 실제 사용자 정보, 키, 개인 경로를 쓰지 않는다.
 
 ## 6. 주간 점검
 
 주간 리뷰 때 이 순서로 한다. 결과는 그 주의 `Weekly Reviews/YYYY-Www.md`에 짧게 남긴다.
 
+0. **구성 요소 목록 갱신:** `python3 scripts/plugin-audit.py components > "Plugin Components.md"`로 [Plugin Components](Plugin%20Components.md)를 다시 만든다.
 1. **업데이트 확인:** `python3 scripts/plugin-audit.py drift --reviews plugin-reviews.json`. "다시 검토 필요"나 "검토 기록 없음"이 나오면 [Plugin Review](Plugin%20Review.md) 순서로 검토한다.
 2. **충돌 확인:** 지난주에 플러그인을 설치하거나 업데이트했다면 `python3 scripts/plugin-audit.py conflicts`를 실행하고, 실제 충돌은 2번 표에 추가한다.
 3. **공식 플러그인 출시 확인:** Integrations (운영 허브 문서)의 커넥터 서비스마다 공식 플러그인이 나왔는지 플러그인 디렉터리에서 검색하고, 결과를 같은 문서의 "공식 플러그인 출시 확인 기록"에 한 줄 남긴다. 나왔으면 창업자에게 설치를 제안한다.

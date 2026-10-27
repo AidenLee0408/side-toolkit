@@ -4,7 +4,13 @@
     "version": "4.0.1",
     "commit": "9b68f7e",
     "reviewed": "2026-10-27",
-    "basis": "직접 검토"
+    "basis": "직접 검토",
+    "hooks": {
+      "SessionStart": "caveman 모드 지시와 설정을 불러와 대화에 넣는다",
+      "SubagentStart": "서브에이전트에도 같은 짧은 답변 지시를 넣는다",
+      "UserPromptSubmit": "메시지마다 짧게 답하라는 지시를 넣고, /caveman 명령으로 바뀐 모드를 기록한다",
+      "SessionEnd": "세션의 토큰 사용 통계를 로컬에 기록한다"
+    }
   },
   "ui-ux-pro-max": {
     "version": "2.15.0",
@@ -22,7 +28,12 @@
     "version": "4.7.1",
     "commit": "989c484",
     "reviewed": "2026-10-27",
-    "basis": "직접 검토"
+    "basis": "직접 검토",
+    "hooks": {
+      "SessionStart": "디자인 엔진을 준비한다",
+      "PostToolUse": "파일을 고친 뒤 UI 변경을 점검한다",
+      "Stop": "답변이 끝날 때 디자인을 한 번 더 점검한다(최대 30초)"
+    }
   },
   "marketing-skills": {
     "version": "2.13.4",
@@ -34,7 +45,12 @@
     "version": "5.3.2",
     "commit": "09c434a",
     "reviewed": "2026-10-27",
-    "basis": "직접 검토"
+    "basis": "직접 검토",
+    "hooks": {
+      "SessionStart": "가장 작게 만들라는 지시를 넣는다",
+      "SubagentStart": "서브에이전트에도 같은 지시를 넣는다",
+      "UserPromptSubmit": "메시지마다 지시를 넣고, /ponytail 명령으로 바뀐 단계를 기록한다"
+    }
   },
   "fluent-korean": {
     "version": "1.0.0",
@@ -52,13 +68,24 @@
     "version": "0.11.17",
     "commit": "deae744",
     "reviewed": "2026-10-27",
-    "basis": "직접 검토 (훅)"
+    "basis": "직접 검토 (훅)",
+    "hooks": {
+      "SessionStart": "Stripe 작업 안내를 넣는다",
+      "UserPromptSubmit": "메시지에 맞는 Stripe 안내를 넣는다",
+      "PostToolUse": "Stripe 스킬과 에이전트 사용을 로컬에 기록한다",
+      "PostToolUseFailure": "실패한 Stripe 작업을 로컬에 기록한다",
+      "PostToolBatch": "작업 묶음이 끝나면 로컬 기록을 정리한다"
+    }
   },
   "posthog": {
     "version": "1.1.67",
     "commit": "e0fbf5e",
     "reviewed": "2026-10-27",
-    "basis": "직접 검토 (훅)"
+    "basis": "직접 검토 (훅)",
+    "hooks": {
+      "SessionEnd": "작업 기록을 PostHog로 보내는 기능. 기본으로 꺼져 있다",
+      "PreToolUse": "PostHog에 쓰기 작업을 하기 전에 확인을 요청한다"
+    }
   },
   "supabase": {
     "version": "0.1.16",
@@ -107,17 +134,26 @@
   "aws-startup-advisor": {
     "version": "2.0.1",
     "reviewed": "2026-10-27",
-    "basis": "claude.ai 디렉터리"
+    "basis": "claude.ai 디렉터리",
+    "hooks": {
+      "SessionStart": "\"스타트업 관점\" 지시를 넣도록 돼 있지만, 읽을 파일이 없어 지금은 작동하지 않는다"
+    }
   },
   "superpowers": {
     "version": "6.4.2",
     "reviewed": "2026-10-27",
-    "basis": "claude.ai 디렉터리"
+    "basis": "claude.ai 디렉터리",
+    "hooks": {
+      "SessionStart": "\"스킬이 조금이라도 맞으면 반드시 불러라\"는 지시(using-superpowers 스킬 전문)를 넣는다"
+    }
   },
   "review-council": {
     "version": "0.2.4",
     "reviewed": "2026-10-27",
-    "basis": "claude.ai 디렉터리"
+    "basis": "claude.ai 디렉터리",
+    "hooks": {
+      "PreToolUse": "저장소의 지침 파일이 기본 브랜치와 다르면 리뷰 에이전트 실행을 막는다"
+    }
   },
   "writing-quality": {
     "version": "0.2.3",

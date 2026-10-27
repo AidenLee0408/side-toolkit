@@ -12,6 +12,8 @@ Subcommands:
   scope      which plugins are on in each project folder
   usage      how often skills, commands, agents and MCP servers were used (from transcripts)
   summary    counts for the side-toolkit README
+  components every skill, command, agent, hook, MCP server and output style per plugin
+             (writes the "Plugin Components" document)
 
 Sources:
   - local plugins: ~/.claude/plugins/installed_plugins.json and enabledPlugins in
@@ -26,6 +28,7 @@ Usage:
   python3 scripts/plugin-audit.py scope --projects ~/SideProjects/hub ~/SideProjects/products/foo ~
   python3 scripts/plugin-audit.py usage --root ~/SideProjects --since 2026-11-01
   python3 scripts/plugin-audit.py summary --projects ~/SideProjects/hub ~
+  python3 scripts/plugin-audit.py components > "Plugin Components.md"
 """
 import argparse
 import collections
@@ -141,6 +144,23 @@ def read_mcp(root, manifest):
     return out
 
 
+def toml_desc(path):
+    try:
+        m = re.search(r'^description\s*=\s*"(.*)"', open(path, encoding="utf-8").read(), re.M)
+    except OSError:
+        return ""
+    return m.group(1) if m else ""
+
+
+def first_sentence(text, limit=160):
+    text = re.sub(r"\s+", " ", text or "").strip()
+    m = re.match(r"(.+?[.!?。])(\s|$)", text)
+    text = m.group(1) if m else text
+    if len(text) > limit:
+        text = text[: limit - 1].rstrip() + "…"
+    return text.replace("|", "¦")
+
+
 def read_plugin(source, key, root, enabled):
     manifest = load_json(os.path.join(root, ".claude-plugin/plugin.json"))
     skills = []
@@ -149,17 +169,28 @@ def read_plugin(source, key, root, enabled):
             meta = frontmatter(f)
             if meta.get("name"):
                 skills.append(dict(name=meta["name"], desc=meta.get("description", "")))
-    commands = sorted({os.path.splitext(os.path.basename(f))[0]
-                       for d in as_list(manifest.get("commands"), "commands")
-                       for f in glob.glob(os.path.join(root, d, "*.md")) + glob.glob(os.path.join(root, d, "*.toml"))})
-    agents = sorted({os.path.splitext(os.path.basename(f))[0]
-                     for d in as_list(manifest.get("agents"), "agents")
-                     for f in glob.glob(os.path.join(root, d, "*.md"))})
+    commands, command_desc = set(), {}
+    for d in as_list(manifest.get("commands"), "commands"):
+        for f in glob.glob(os.path.join(root, d, "*.md")) + glob.glob(os.path.join(root, d, "*.toml")):
+            name = os.path.splitext(os.path.basename(f))[0]
+            commands.add(name)
+            command_desc.setdefault(name, frontmatter(f).get("description", "") if f.endswith(".md") else toml_desc(f))
+    commands = sorted(commands)
+    agents, agent_desc = set(), {}
+    for d in as_list(manifest.get("agents"), "agents"):
+        for f in glob.glob(os.path.join(root, d, "*.md")):
+            meta = frontmatter(f)
+            name = meta.get("name") or os.path.splitext(os.path.basename(f))[0]
+            agents.add(name)
+            agent_desc[name] = meta.get("description", "")
+    agents = sorted(agents)
     styles = [frontmatter(f).get("name") or os.path.basename(f)[:-3]
               for f in glob.glob(os.path.join(root, "output-styles", "*.md"))]
     return dict(source=source, key=key, name=manifest.get("name") or key.split("@")[0], root=root,
                 enabled=enabled, version=manifest.get("version", ""), commit="",
+                description=manifest.get("description", ""),
                 skills=skills, commands=commands, agents=agents, styles=styles,
+                command_desc=command_desc, agent_desc=agent_desc,
                 hooks=read_hooks(root, manifest), mcp=read_mcp(root, manifest))
 
 
@@ -438,6 +469,55 @@ def cmd_summary(args):
     print(f"모든 폴더에서 켜진 스킬 {sum(len(p['skills']) for p in on)}개, 훅 {sum(len(p['hooks']) for p in on)}개, "
           f"MCP 서버 {sum(len(p['mcp']) for p in on)}개, 에이전트 {sum(len(p['agents']) for p in on)}개")
 
+def cmd_components(args):
+    plugins, _ = collect(args.project, include_disabled=True)
+    reviews = load_json(args.reviews)
+    print("---\ntype: generated\nstatus: generated\n---\n")
+    print("# Plugin Components\n")
+    print("플러그인마다 들어 있는 스킬, 명령, 에이전트, 훅, MCP 서버, 출력 스타일의 목록이다. "
+          "`python3 scripts/plugin-audit.py components`로 만든 문서라 손으로 고치지 않는다. "
+          "스킬, 명령, 에이전트의 설명은 각 플러그인이 적어 둔 원문(대부분 영어)의 첫 문장이고, "
+          "훅의 \"하는 일\"은 검토하면서 `plugin-reviews.json`에 적어 둔 내용이다. "
+          "왜 설치했는지와 상태는 [[Plugins]]에, 어떤 스킬을 먼저 쓰는지는 [[Plugin Playbook]]에 있다.\n")
+    print("| 플러그인 | 켜짐 | 스킬 | 명령 | 에이전트 | 훅 | MCP | 출력 스타일 |\n|---|---|---|---|---|---|---|---|")
+    for p in plugins:
+        anchor = p["name"]
+        print(f"| [{p['name']}](#{anchor}) | {'예' if p['enabled'] else '아니오'} | {len(p['skills'])} | {len(p['commands'])} | "
+              f"{len(p['agents'])} | {len(p['hooks'])} | {len(p['mcp'])} | {len(p['styles'])} |")
+    for p in plugins:
+        state = "켜짐" if p["enabled"] else "꺼짐"
+        print(f"\n## {p['name']}\n")
+        print(f"{p['source']} · {state} · 버전 {p['version'] or '-'}" + (f" · 커밋 {p['commit']}" if p["commit"] else ""))
+        if p["description"]:
+            print(f"\n> {first_sentence(p['description'], 300)}")
+        if p["skills"]:
+            print(f"\n**스킬 {len(p['skills'])}개**\n\n| 스킬 | 설명 |\n|---|---|")
+            for sk in sorted(p["skills"], key=lambda x: x["name"]):
+                print(f"| `{p['name']}:{sk['name'].split(':')[-1]}` | {first_sentence(sk['desc'])} |")
+        if p["commands"]:
+            print(f"\n**명령 {len(p['commands'])}개**\n\n| 명령 | 설명 |\n|---|---|")
+            for c in p["commands"]:
+                print(f"| `/{c}` | {first_sentence(p['command_desc'].get(c, ''))} |")
+        if p["agents"]:
+            print(f"\n**에이전트 {len(p['agents'])}개**\n\n| 에이전트 | 설명 |\n|---|---|")
+            for a in p["agents"]:
+                print(f"| `{a}` | {first_sentence(p['agent_desc'].get(a, ''))} |")
+        if p["hooks"]:
+            notes = reviews.get(p["name"], {}).get("hooks", {})
+            print(f"\n**훅 {len(p['hooks'])}개** (부르지 않아도 정해진 시점마다 실행된다)\n\n| 시점 | 대상 | 하는 일 | 대화에 지시를 넣을 수 있음 |\n|---|---|---|---|")
+            for h in p["hooks"]:
+                note = notes.get(h["event"]) or f"`{(h['command'][:60] + '...') if len(h['command']) > 60 else h['command']}`".replace("|", "¦")
+                print(f"| {h['event']} | {(h['matcher'] or '전체').replace('|', '¦')} | {note} | {'예' if h['event'] in INJECT_EVENTS else '아니오'} |")
+        if p["mcp"]:
+            print(f"\n**MCP 서버 {len(p['mcp'])}개**\n\n| 서버 | 방식 | 연결 대상 |\n|---|---|---|")
+            for m in p["mcp"]:
+                print(f"| {m['name']} | {m['kind']} | `{m['where'] or '-'}` |")
+        if p["styles"]:
+            print(f"\n**출력 스타일 {len(p['styles'])}개**: " + ", ".join(f"`{x}`" for x in p["styles"]))
+        if not any([p["skills"], p["commands"], p["agents"], p["hooks"], p["mcp"], p["styles"]]):
+            print("\n구성 요소를 찾지 못했다.")
+
+
 def shorten(path):
     return path.replace(HOME, "~")
 
@@ -445,13 +525,13 @@ def shorten(path):
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd")
-    for name in ["inventory", "conflicts", "drift"]:
+    for name in ["inventory", "conflicts", "drift", "components"]:
         sp = sub.add_parser(name)
         sp.add_argument("--project", default=os.getcwd())
         if name == "conflicts":
             sp.add_argument("--min", type=float, default=0.33)
             sp.add_argument("--top", type=int, default=30)
-        if name == "drift":
+        if name in ("drift", "components"):
             sp.add_argument("--reviews", default="plugin-reviews.json")
     sc = sub.add_parser("scope")
     sc.add_argument("--projects", nargs="+", default=[os.getcwd()])
@@ -465,7 +545,8 @@ def main():
     if hasattr(args, "project"):
         args.project = os.path.realpath(os.path.expanduser(args.project))
     return {"inventory": cmd_inventory, "conflicts": cmd_conflicts, "drift": cmd_drift,
-            "scope": cmd_scope, "usage": cmd_usage, "summary": cmd_summary}.get(args.cmd or "inventory")(args if args.cmd else ap.parse_args(["inventory"]))
+            "scope": cmd_scope, "usage": cmd_usage, "summary": cmd_summary,
+            "components": cmd_components}.get(args.cmd or "inventory")(args if args.cmd else ap.parse_args(["inventory"]))
 
 
 if __name__ == "__main__":

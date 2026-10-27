@@ -11,7 +11,7 @@ mkdir -p "$repo/docs" "$repo/reports"
 copy() { python3 - "$1" "$2" "$3" <<'EOF'
 import re, sys
 src, dst, prefix = sys.argv[1], sys.argv[2], sys.argv[3]
-docs = {"Plugins", "Plugin Review", "Plugin Playbook", "Plugin Issues", "Plugin Changelog"}
+docs = {"Plugins", "Plugin Components", "Plugin Review", "Plugin Playbook", "Plugin Issues", "Plugin Changelog"}
 def link(m):
     name = m.group(1)
     if name in docs:
@@ -22,7 +22,7 @@ open(dst, "w", encoding="utf-8").write(text)
 EOF
 }
 
-for d in "Plugins" "Plugin Review" "Plugin Playbook" "Plugin Issues" "Plugin Changelog"; do
+for d in "Plugins" "Plugin Components" "Plugin Review" "Plugin Playbook" "Plugin Issues" "Plugin Changelog"; do
   copy "$hub/$d.md" "$repo/docs/$d.md" ""
 done
 for f in "$hub/Plugin Reports/"*.md; do
