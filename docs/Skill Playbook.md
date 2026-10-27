@@ -45,6 +45,12 @@ last_reviewed: 2026-10-27
 | caveman ↔ fluent-korean | 짧게 줄이라는 지시와 완결된 문장으로 쓰라는 지시가 정반대다 | caveman은 그대로 두고, 한국어 답변은 writing-concise-korean을 따른다(내용만 줄이고 조사와 어미는 지킨다). fluent-korean은 허브와 제품 저장소에서만 켠다 | 창업자 결정 2026-10-27, Skill Issues #10 |
 | impeccable 훅 ↔ UI가 없는 작업 | 파일을 고칠 때마다 훅이 실행되고, 답변 끝에 최대 30초가 걸린다 | 허브나 백엔드 작업에서 느려지면 끈다 | 가설 |
 | marketing(Anthropic) ↔ marketing-skills | 하는 일이 겹친다 | 실행은 marketing-skills를 먼저 쓴다. 첫 홍보 작업에서 비교해 하나만 남긴다 | 가설 |
+| 코드 리뷰 스킬 6개 | 리뷰를 부탁하면 어느 것이 불릴지 정해져 있지 않다 | `/code-review`를 먼저 쓰고, 큰 변경에만 review-council을 쓴다 | 2026-10-27 스킬 충돌 검사 |
+| `competitive-brief` (product-management ↔ marketing) | 이름이 같다 | 기획 단계는 product-management, 홍보 단계는 marketing-skills `competitor-profiling`을 쓴다 | 2026-10-27 스킬 충돌 검사 |
+| `seo-audit` (marketing ↔ marketing-skills) | 이름이 같다 | marketing-skills `seo-audit`을 쓴다 | 2026-10-27 스킬 충돌 검사 |
+| 브레인스토밍 (superpowers ↔ product-management) | 둘 다 브레인스토밍을 맡는다 | 제품 아이디어는 product-management, 기능 설계 직전은 superpowers `brainstorming`을 쓴다 | 2026-10-27 스킬 충돌 검사 |
+| 고객 조사 (marketing-skills `customer-research` ↔ product-management `synthesize-research`) | 조사 정리가 겹친다 | 조사 결과 정리는 product-management, 리뷰와 커뮤니티 수집은 marketing-skills를 쓴다 | 2026-10-27 스킬 충돌 검사 |
+| 세션 시작 훅 5개 (caveman, impeccable, ponytail, aws-startup-advisor, superpowers) | 세션마다 여러 지시가 한꺼번에 들어온다. aws-startup-advisor는 보류 상태인데도 "스타트업 관점" 지시를 넣는다 | aws-startup-advisor 사용 중지를 제안한다 | 2026-10-27 스킬 충돌 검사 |
 
 ## 3. 스킬을 쓰지 않아도 되는 경우
 
@@ -59,7 +65,8 @@ last_reviewed: 2026-10-27
 ## 4. 이 문서를 고치는 방법
 
 1. 작업 중에 스킬 이슈가 생기면 바로 [Skill Issues](Skill%20Issues.md)에 한 줄 추가한다. 이 문서의 우선순위나 충돌 표, 또는 [Skills](Skills.md)의 상태를 바꾸면 [Skill Changelog](Skill%20Changelog.md)에 한 줄 추가한다.
-2. 프로젝트나 큰 작업을 마치면 `python3 scripts/skill-usage.py --root <저장소> --since <시작일>`로 사용 횟수를 뽑고, `Skill Reports/_Template.md`로 리포트를 쓴다.
-3. 주간 리뷰 때 새 리포트를 읽는다. 같은 결과가 두 번 이상 나오면 위 표의 근거를 "가설"에서 리포트 이름으로 바꾼다.
-4. 스킬 상태(시험 사용 → 채택 또는 제외)는 [Skills](Skills.md)에서 바꾼다. 제외는 창업자가 정한다.
-5. 월간 재검토 때 전체 집계(`python3 scripts/skill-usage.py --root ~/SideProjects --since <한 달 전>`)로 한 번도 쓰지 않은 플러그인을 찾아 사용 중지 후보로 올린다.
+2. 플러그인을 설치하거나 업데이트하면 `python3 scripts/skill-conflicts.py`로 충돌 후보를 뽑고, 실제 충돌은 2번 표에 추가한다. 월간 재검토 때도 한 번 돌린다.
+3. 프로젝트나 큰 작업을 마치면 `python3 scripts/skill-usage.py --root <저장소> --since <시작일>`로 사용 횟수를 뽑고, `Skill Reports/_Template.md`로 리포트를 쓴다.
+4. 주간 리뷰 때 새 리포트를 읽는다. 같은 결과가 두 번 이상 나오면 위 표의 근거를 "가설"에서 리포트 이름으로 바꾼다.
+5. 스킬 상태(시험 사용 → 채택 또는 제외)는 [Skills](Skills.md)에서 바꾼다. 제외는 창업자가 정한다.
+6. 월간 재검토 때 전체 집계(`python3 scripts/skill-usage.py --root ~/SideProjects --since <한 달 전>`)로 한 번도 쓰지 않은 플러그인을 찾아 사용 중지 후보로 올린다.

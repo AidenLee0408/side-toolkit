@@ -110,6 +110,20 @@ python3 scripts/skill-usage.py --root ~/SideProjects --since 2026-11-01
 
 <br>
 
+## 스킬 충돌 검사
+
+Claude는 켜진 스킬의 설명을 모두 읽고 무엇을 부를지 고릅니다. 여러 플러그인이 같은 일을 맡으면 엉뚱한 스킬이 불리므로, 플러그인을 설치하거나 업데이트할 때마다 충돌 후보를 뽑아 봅니다.
+
+```bash
+python3 scripts/skill-conflicts.py --project ~/SideProjects/hub
+```
+
+- 이름이 같은 스킬, 같은 일을 맡는 스킬(주제별), 설명이 많이 겹치는 스킬 쌍을 보여 줍니다.
+- 세션 시작이나 메시지 입력 때마다 지시를 넣는 훅과 출력 스타일도 함께 보여 줍니다.
+- 결과는 후보일 뿐입니다. 실제로 부딪히는지는 사람이 보고 [Playbook](docs/Skill%20Playbook.md)에 정합니다. 첫 검사 결과는 [리포트](reports/2026-10-27%20%EC%8A%A4%ED%82%AC%20%EC%B6%A9%EB%8F%8C%20%EA%B2%80%EC%82%AC.md)에 있습니다.
+
+<br>
+
 ## 내 환경에 가져다 쓰기
 
 - 플러그인 목록과 검토 메모는 [Skills](docs/Skills.md)의 표를 참고하면 됩니다. 설치 명령은 각 저장소의 README를 따르세요.

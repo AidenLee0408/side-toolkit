@@ -28,4 +28,5 @@ for f in "$hub/Skill Reports/"*.md; do
   copy "$f" "$repo/reports/$(basename "$f")" "../docs/"
 done
 cp "$hub/scripts/skill-usage.py" "$repo/scripts/skill-usage.py"
+cp "$hub/scripts/skill-conflicts.py" "$repo/scripts/skill-conflicts.py"
 git -C "$repo" status --short
