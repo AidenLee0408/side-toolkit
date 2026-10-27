@@ -32,3 +32,4 @@ last_reviewed: 2026-10-27
 | 15 | 2026-10-27 | aws-startup-advisor | 충돌 | 상태는 보류인데 세션 시작 훅이 "스타트업 관점으로 모든 답변을 맞추라"는 지시를 계속 넣는다. 첫 스킬 충돌 검사에서 찾았다 | claude.ai에서 사용 중지를 제안했다 | 열림 |
 | 16 | 2026-10-27 | aws-startup-advisor | 충돌 | #15 후속: 창업자가 우선 써 보기로 했다 | 켜 둔 채 답변이 스타트업 관점으로 치우치는지 지켜본다. 문제가 보이면 이 로그에 남긴다 | 관찰 중 |
 | 17 | 2026-10-27 | engineering, product-management, marketing, gtm-planner | 충돌 | 네 플러그인이 같은 MCP 서버(Notion, Slack, Gmail 등 13개)를 각자 연결한다. 지금은 로그인하지 않아 쓰이지 않는다 | 실제로 쓸 서비스는 한 플러그인에서만 로그인한다. [Plugins](Plugins.md)에 표로 정리했다 | 관찰 중 |
+| 18 | 2026-10-27 | aws-startup-advisor | 충돌 | #15 정정: 세션 시작 훅이 읽는 `scripts/startup-context.txt`가 지금 설치본에 없어서, 실제로는 아무 지시도 넣지 않는다. #15는 훅 설명만 보고 판단했다 | [Plugins](Plugins.md)의 claude.ai 플러그인 검토 메모에 반영했다. 업데이트로 파일이 생기면 다시 확인한다 | 관찰 중 |

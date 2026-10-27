@@ -28,7 +28,6 @@ done
 for f in "$hub/Plugin Reports/"*.md; do
   copy "$f" "$repo/reports/$(basename "$f")" "../docs/"
 done
-cp "$hub/scripts/skill-usage.py" "$repo/scripts/skill-usage.py"
 cp "$hub/scripts/plugin-audit.py" "$repo/scripts/plugin-audit.py"
 cp "$hub/plugin-reviews.json" "$repo/plugin-reviews.json"
 git -C "$repo" status --short

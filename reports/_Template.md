@@ -18,10 +18,10 @@ period: YYYY-MM-DD ~ YYYY-MM-DD
 - 결과: (출시했다, 중단했다, 진행 중이다 중 하나)
 
 ## 2. 사용 집계 (자동)
-`python3 scripts/skill-usage.py --root <저장소 경로> --since <시작일> --until <종료일>`의 출력을 붙인다.
+`python3 scripts/plugin-audit.py usage --root <저장소 경로> --since <시작일> --until <종료일>`의 출력을 붙인다.
 
 - 많이 쓴 스킬 상위 5개:
-- 설치했지만 한 번도 안 쓴 플러그인:
+- 켜져 있지만 한 번도 쓰지 않은 플러그인 (집계 결과 맨 아래):
 - 사람이 직접 부른 명령과 Claude가 알아서 부른 스킬의 비율:
 
 훅으로만 작동하는 플러그인(caveman, ponytail, impeccable의 훅)은 집계되지 않는다. 이런 플러그인은 아래 3번에 직접 느낀 대로 적는다.
@@ -58,12 +58,24 @@ period: YYYY-MM-DD ~ YYYY-MM-DD
 - 문구 결과 만족도 (1~5):
 - 사람이 직접 고친 양: (적다, 보통이다, 많다)
 
-## 9. 외부 서비스
+## 9. 훅과 출력 스타일
+부르지 않아도 작동하는 것이라 집계에 나오지 않는다. 직접 느낀 대로 적는다.
+
+| 훅 또는 스타일 | 영향 (도움이 됐다, 영향 없음, 방해가 됐다) | 구체적인 예 |
+|---|---|---|
+| caveman (메시지마다 짧게) | | |
+| ponytail (메시지마다 작게) | | |
+| impeccable (파일 수정 후, 답변 끝) | | |
+| superpowers, aws-startup-advisor (세션 시작) | | |
+| 출력 스타일 (fluent-korean 등) | | |
+
+## 10. 외부 서비스와 MCP
 - 새로 로그인한 서비스:
 - 플러그인과 커넥터가 겹친 곳:
 - 공식 플러그인이 없어 커넥터를 쓴 서비스:
+- 이번 기간에 업데이트된 플러그인과 다시 검토했는지 (`plugin-audit.py drift` 결과):
 
-## 10. Playbook과 Plugins에 반영할 제안
+## 11. Playbook과 Plugins에 반영할 제안
 - [ ] [Plugin Playbook](../docs/Plugin%20Playbook.md) 1번 표: 어느 작업에서 먼저 쓸 스킬을 무엇으로 바꿀지
 - [ ] [Plugin Playbook](../docs/Plugin%20Playbook.md) 2번 표: 새로 발견한 충돌
 - [ ] [Plugins](../docs/Plugins.md) 상태 변경: (시험 사용에서 채택, 제외, 사용 중지 중 무엇으로 바꿀지)

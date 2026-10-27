@@ -54,7 +54,7 @@ last_reviewed: 2026-10-27
 |---|---|---|---|---|
 | **product-management** | claude.ai (Anthropic) | 브레인스토밍, 경쟁 분석, 명세(PRD) 작성, 리서치 정리, 로드맵, 지표 검토를 돕는다 | 아이디어를 검증하고 명세를 쓰려고 | 채택 |
 | **gtm-planner** | claude.ai | 시장 지도, 포지셔닝, 수요 계획, 90일 로드맵 순서로 시장 진입 전략을 세운다 | "누구에게 무엇을 어떻게 팔까"를 정하려고 | 시험 사용 |
-| **aws-startup-advisor** | claude.ai | AWS 구성과 비용, Activate 크레딧, 마이그레이션을 조언한다 | AWS를 쓰게 될 경우에 대비해 두었다. 세션마다 "스타트업 관점" 지시를 넣는 훅이 있다 | 시험 사용 (훅 영향을 지켜본다) |
+| **aws-startup-advisor** | claude.ai | AWS 구성과 비용, Activate 크레딧, 마이그레이션을 조언한다 | AWS를 쓰게 될 경우에 대비해 두었다. "스타트업 관점" 지시를 넣는 훅이 있지만, 지금 설치본에서는 읽을 파일이 없어 작동하지 않는다 | 시험 사용 |
 
 ## 3. 디자인·프론트엔드
 
@@ -93,7 +93,7 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 | **cloudflare** 1.0.0 | Workers와 Pages 배포, Next.js on Cloudflare, 성능 점검 | 배포 방식 후보라서 | 공식 플러그인(cloudflare/skills) | 사용 중지 (배포 방식을 정할 때 다시 켠다) |
 | **posthog** 1.1.67 | 분석, 실험, 기능 플래그, 오류 추적 스킬과 MCP | 출시 후 지표를 보려고 | 훅이 2개다. 하나는 쓰기 작업 전에 확인을 요청하는 안전장치다. 다른 하나는 세션이 끝날 때 작업 기록을 PostHog로 보내는 기능인데 **기본으로 꺼져 있고** 켜지 않는다(`POSTHOG_LLMA_CC_ENABLED`와 키가 있어야 작동) | 사용 중지 (출시 후 다시 켠다) |
 | **playwright** | 브라우저 자동화와 E2E 테스트 MCP (Microsoft) | 결제와 가입 흐름을 실제 브라우저로 시험하려고 | 공식 플러그인 | 시험 사용 |
-| **marketing** 1.2.0 | 콘텐츠, 캠페인, 브랜드 목소리, 성과 보고 (Anthropic) | 창업자 요청으로 설치했다. marketing-skills와 비교한다 | 공식 플러그인 | 시험 사용 (marketing-skills와 비교 중) |
+| **marketing** 1.2.0 | 콘텐츠, 캠페인, 브랜드 목소리, 성과 보고 (Anthropic) | 창업자 요청으로 설치했다. marketing-skills와 비교한다 | 공식 플러그인. MCP 서버 13개(Slack, Notion, HubSpot, Canva 등)를 함께 연결한다. 다른 플러그인과 겹치는 연결은 Integrations (운영 허브 문서)에 정리했다 | 시험 사용 (marketing-skills와 비교 중) |
 
 ## 7. 자체 제작 플러그인 (side-toolkit)
 
@@ -178,6 +178,21 @@ Claude는 세션마다 스킬 설명을 모두 읽는다. 그래서 스킬이 �
 | fluent-korean | snflkd/fluent-korean (MIT) | ce8683f | 출력 스타일 문서 2개가 전부다. 훅, MCP, 스크립트가 없다 |
 | humanize-korean | epoko77-ai/im-not-ai (MIT) | b37e020 | 스킬 4개, 에이전트 9개, 명령 4개. 훅과 MCP가 없고, 플러그인이 실제로 쓰는 부분에는 외부 통신 코드가 없다 |
 | ponytail | DietrichGebert/ponytail (MIT) | 09c434a | 훅 3개가 로컬에서만 실행된다. 매 턴 작업 기록을 `~/.config/ponytail/band/`에 CSV로 저장한다. 웹훅은 비워 두었다. 기본 단계는 lite |
+
+## claude.ai 플러그인 검토 메모
+
+claude.ai 디렉터리 플러그인은 코드를 고정할 수 없어서, 훅과 MCP만 확인한다. `plugin-audit.py inventory`로 찾은 내용이다.
+
+| 플러그인 | 훅 | MCP 서버 | 메모 |
+|---|---|---|---|
+| superpowers 6.4.2 | 세션 시작 1개 | 없음 | 세션마다 "스킬이 조금이라도 맞으면 반드시 불러라"는 지시(using-superpowers 스킬 전문)를 넣는다. 스킬이 많을수록 엉뚱한 스킬이 불릴 가능성이 커진다 |
+| aws-startup-advisor 2.0.1 | 세션 시작 1개 | 4개 (AWS 문서, 가격 2개, Temporal 문서) | 훅은 `scripts/startup-context.txt`를 읽어 "스타트업 관점" 지시를 넣도록 돼 있다. 그런데 지금 설치본에는 이 파일이 없어서 실제로는 아무것도 넣지 않는다. 업데이트로 파일이 생기면 다시 확인한다 |
+| review-council 0.2.4 | 에이전트 실행 전 1개 | 없음 | 저장소의 CLAUDE.md 같은 지침 파일이 기본 브랜치와 다르면 리뷰 에이전트 실행을 막는다. 안전장치다 |
+| engineering 1.2.0 | 없음 | 10개 (Slack, Notion, GitHub, Linear 등) | 다른 플러그인과 겹치는 연결이 많다 |
+| product-management 1.2.0 | 없음 | 16개 | 가장 많은 서비스를 연결한다 |
+| gtm-planner 0.3.3 | 없음 | 4개 (HubSpot, Notion, Similarweb, Ahrefs) | — |
+| context7 | 없음 | 1개 (Context7 문서) | 로그인 전 |
+| writing-quality 0.2.3, frontend-design | 없음 | 없음 | 스킬만 있다 |
 
 ### 검토 후 제외
 

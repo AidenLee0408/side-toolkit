@@ -29,14 +29,14 @@ TRANSLATIONESE = [
 ]
 CALQUES = ["처음 판", "미적 지시", "최종 판", "다관점", "동시 발동"]
 # Clipped labels: coined status words and jargon that read like shorthand.
-CLIPPED = ["꺼 둠", "켜 둠", "꺼 둔", "켜 둔", "겹침 지도", "기본 담당", "주력", "시험 중"]
+CLIPPED = ["꺼 둠", "켜 둠", "겹침 지도", "기본 담당", "주력"]
 
 
 def ends_in_nominal_m(word):
     """True for a short word ending in a verb nominalized with ㅁ (함, 됨, 둠, 켬)."""
     word = re.sub(r"[^가-힣]", "", word)
-    # Only verb nominalizations; nouns that happen to end in ㅁ (점검, 시점) are fine.
-    return bool(word) and len(word) <= 4 and word[-1] in "함됨둠켬끔짐큼씀줌봄옴"
+    # Only verb nominalizations; nouns that happen to end in ㅁ (점검, 시점) and on/off states (켜짐, 꺼짐) are fine.
+    return bool(word) and len(word) <= 4 and word[-1] in "함됨둠켬끔큼씀줌봄옴"
 NOUN_SUFFIX = re.compile(r"(방지|기록용|점검용|확인용|잡기|정리|관리|처리|적용|지정|개선|확인|검토|설치|사용|진행)$")
 
 

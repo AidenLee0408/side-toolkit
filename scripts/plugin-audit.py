@@ -10,6 +10,8 @@ Subcommands:
   conflicts  candidates for skills, hooks and output styles that clash
   drift      installed plugins whose commit or version differs from the review record
   scope      which plugins are on in each project folder
+  usage      how often skills, commands, agents and MCP servers were used (from transcripts)
+  summary    counts for the side-toolkit README
 
 Sources:
   - local plugins: ~/.claude/plugins/installed_plugins.json and enabledPlugins in
@@ -22,8 +24,11 @@ Usage:
   python3 scripts/plugin-audit.py conflicts --project ~/SideProjects/hub
   python3 scripts/plugin-audit.py drift --reviews plugin-reviews.json
   python3 scripts/plugin-audit.py scope --projects ~/SideProjects/hub ~/SideProjects/products/foo ~
+  python3 scripts/plugin-audit.py usage --root ~/SideProjects --since 2026-11-01
+  python3 scripts/plugin-audit.py summary --projects ~/SideProjects/hub ~
 """
 import argparse
+import collections
 import glob
 import itertools
 import json
@@ -341,6 +346,98 @@ def cmd_scope(args):
         print(f"| {name} | " + " | ".join(cells) + " |")
 
 
+COMMAND_RE = re.compile(r"<command-name>/?([^<\s]+)</command-name>")
+
+
+def cmd_usage(args):
+    """Count use from ~/.claude/projects transcripts whose working directory is under --root."""
+    root = os.path.realpath(os.path.expanduser(args.root))
+    skills, commands, agents, mcp = (collections.Counter() for _ in range(4))
+    sessions = set()
+    for path in glob.glob(os.path.join(HOME, ".claude/projects/*/*.jsonl")):
+        with open(path, encoding="utf-8", errors="replace") as f:
+            for line in f:
+                try:
+                    d = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                cwd = d.get("cwd") or ""
+                if not (cwd == root or cwd.startswith(root + os.sep)):
+                    continue
+                day = (d.get("timestamp") or "")[:10]
+                if (args.since and day < args.since) or (args.until and day > args.until):
+                    continue
+                content = (d.get("message") or {}).get("content")
+                if d.get("type") == "user":
+                    text = content if isinstance(content, str) else json.dumps(content)
+                    for m in COMMAND_RE.findall(text or ""):
+                        commands[m] += 1
+                        sessions.add(d.get("sessionId"))
+                if not isinstance(content, list):
+                    continue
+                for c in content:
+                    if c.get("type") != "tool_use":
+                        continue
+                    name, inp = c.get("name", ""), c.get("input") or {}
+                    if name == "Skill" and inp.get("skill"):
+                        skills[inp["skill"]] += 1
+                    elif name == "Agent":
+                        agents[inp.get("subagent_type") or "general-purpose"] += 1
+                    elif name.startswith("mcp__") and not name.startswith("mcp__ccd_"):
+                        mcp[name.split("__")[1]] += 1
+                    else:
+                        continue
+                    sessions.add(d.get("sessionId"))
+
+    def owner(name):
+        return name.split(":", 1)[0] if ":" in name else "(기본)"
+
+    by_plugin = collections.Counter()
+    for counter in (skills, commands, agents):
+        for k, v in counter.items():
+            by_plugin[owner(k)] += v
+    for k, v in mcp.items():
+        by_plugin[k.replace("plugin_", "").split("_")[0]] += v
+    period = f"{args.since or '처음'} ~ {args.until or '지금'}"
+    print(f"# 사용 집계\n\n범위: `{shorten(root)}` / 기간: {period} / 사용이 있던 세션: {len(sessions)}\n")
+    print("훅과 출력 스타일은 부르지 않아도 작동하므로 집계되지 않는다.\n")
+    for title, counter in [("플러그인별 합계", by_plugin), ("스킬 (Claude가 부름)", skills),
+                           ("슬래시 명령 (사람이 입력)", commands), ("서브에이전트", agents), ("MCP 서버", mcp)]:
+        print(f"## {title}\n")
+        if not counter:
+            print("없음\n")
+            continue
+        print("| 이름 | 횟수 |\n|---|---|")
+        for k, v in counter.most_common():
+            print(f"| {k} | {v} |")
+        print()
+    plugins, _ = collect(root)
+    unused = [p["name"] for p in plugins if p["name"] not in by_plugin and (p["skills"] or p["commands"] or p["agents"] or p["mcp"])]
+    print("## 켜져 있지만 이 기간에 한 번도 쓰지 않은 플러그인\n")
+    print(", ".join(sorted(unused)) or "없음")
+    print("\n(훅이나 출력 스타일로만 작동하는 플러그인은 쓰지 않은 것처럼 보일 수 있다.)")
+
+
+def cmd_summary(args):
+    """Counts across folders: on everywhere, on in some folders only, off everywhere."""
+    projects = [os.path.realpath(os.path.expanduser(p)) for p in args.projects]
+    state, info = {}, {}
+    for project in projects:
+        plugins, _ = collect(project, include_disabled=True)
+        for p in plugins:
+            state.setdefault(p["name"], []).append(p["enabled"])
+            info[p["name"]] = p
+    everywhere = [n for n, v in state.items() if all(v)]
+    some = [n for n, v in state.items() if any(v) and not all(v)]
+    off = [n for n, v in state.items() if not any(v)]
+    on = [info[n] for n in everywhere]
+    print(f"모든 폴더에서 사용 중: {len(on)}개 (claude.ai {sum(p['source'] == 'claude.ai' for p in on)}개, "
+          f"로컬 {sum(p['source'] == '로컬' for p in on)}개)")
+    print(f"일부 폴더에서만 사용: {len(some)}개 ({', '.join(sorted(some)) or '없음'})")
+    print(f"사용 중지: {len(off)}개 ({', '.join(sorted(off)) or '없음'})")
+    print(f"모든 폴더에서 켜진 스킬 {sum(len(p['skills']) for p in on)}개, 훅 {sum(len(p['hooks']) for p in on)}개, "
+          f"MCP 서버 {sum(len(p['mcp']) for p in on)}개, 에이전트 {sum(len(p['agents']) for p in on)}개")
+
 def shorten(path):
     return path.replace(HOME, "~")
 
@@ -358,11 +455,17 @@ def main():
             sp.add_argument("--reviews", default="plugin-reviews.json")
     sc = sub.add_parser("scope")
     sc.add_argument("--projects", nargs="+", default=[os.getcwd()])
+    us = sub.add_parser("usage")
+    us.add_argument("--root", default=os.getcwd())
+    us.add_argument("--since", help="YYYY-MM-DD, inclusive")
+    us.add_argument("--until", help="YYYY-MM-DD, inclusive")
+    sm = sub.add_parser("summary")
+    sm.add_argument("--projects", nargs="+", default=[os.path.join(HOME, "SideProjects/hub"), HOME])
     args = ap.parse_args()
     if hasattr(args, "project"):
         args.project = os.path.realpath(os.path.expanduser(args.project))
     return {"inventory": cmd_inventory, "conflicts": cmd_conflicts, "drift": cmd_drift,
-            "scope": cmd_scope}.get(args.cmd or "inventory")(args if args.cmd else ap.parse_args(["inventory"]))
+            "scope": cmd_scope, "usage": cmd_usage, "summary": cmd_summary}.get(args.cmd or "inventory")(args if args.cmd else ap.parse_args(["inventory"]))
 
 
 if __name__ == "__main__":

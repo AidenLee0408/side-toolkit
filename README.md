@@ -11,14 +11,16 @@
 
 | 항목 | 현황 |
 |---|---|
-| 사용 중인 플러그인 | 19개 (claude.ai 9개, 로컬 10개) |
+| 모든 폴더에서 사용 중인 플러그인 | 19개 (claude.ai 9개, 로컬 10개) |
+| 문서 작업과 제품 저장소에서만 쓰는 플러그인 | 2개 (fluent-korean, humanize-korean) |
 | 자체 제작 플러그인 | 1개 ([side-skills](#자체-제작-스킬), 스킬 2개) |
 | 사용 중지한 플러그인 | 3개 (posthog, cloudflare, stripe). 필요해지면 다시 켭니다 |
+| 켜진 구성 요소 | 스킬 156개, 훅 13개, MCP 서버 50개, 에이전트 23개 |
 | 검토 후 제외한 플러그인 | 8개 |
 | 사용 기준을 정한 작업 | 18개 |
 | 변경 이력과 이슈 기록 | [Changelog](docs/Plugin%20Changelog.md), [Issues](docs/Plugin%20Issues.md) |
 
-마지막으로 갱신한 날은 2026-10-27이며, 매주 갱신합니다.
+마지막으로 갱신한 날은 2026-10-27이며, 매주 갱신합니다. 숫자는 `python3 scripts/plugin-audit.py summary`로 뽑습니다.
 
 <br>
 
@@ -98,22 +100,9 @@ flowchart LR
 
 <br>
 
-## 스킬 사용 횟수 집계
-
-Claude Code 대화 기록(`~/.claude/projects`)에서 스킬, 슬래시 명령, 서브에이전트, MCP 사용 횟수를 셉니다.
-
-```bash
-python3 scripts/skill-usage.py --root ~/SideProjects --since 2026-11-01
-```
-
-- `--root` 아래에서 실행된 세션만 셉니다. 다른 작업 기록은 섞이지 않습니다.
-- 훅으로만 작동하는 플러그인(caveman, ponytail, impeccable의 훅)은 집계되지 않습니다.
-
-<br>
-
 ## 플러그인 점검 스크립트
 
-`scripts/plugin-audit.py`는 이 컴퓨터에 설치된 플러그인을 네 가지로 점검합니다.
+`scripts/plugin-audit.py`는 이 컴퓨터에 설치된 플러그인을 점검합니다.
 
 | 명령 | 하는 일 |
 |---|---|
@@ -121,12 +110,15 @@ python3 scripts/skill-usage.py --root ~/SideProjects --since 2026-11-01
 | `conflicts` | 이름이 같은 스킬, 같은 일을 맡는 스킬, 설명이 많이 겹치는 스킬, 같은 시점에 지시를 넣는 훅, 여러 플러그인이 함께 연결하는 MCP 서버를 후보로 뽑습니다 |
 | `drift` | 설치된 버전과 커밋이 검토 기록(`plugin-reviews.json`)과 다른 플러그인을 찾습니다. 검토하지 않은 업데이트를 잡아냅니다 |
 | `scope` | 폴더마다 어떤 플러그인이 켜지는지 비교합니다 |
+| `usage` | Claude Code 대화 기록에서 스킬, 명령, 에이전트, MCP 사용 횟수를 세고, 켜져 있지만 한 번도 쓰지 않은 플러그인을 보여 줍니다 |
+| `summary` | 위 "한눈에 보기"의 숫자를 뽑습니다 |
 
 ```bash
 python3 scripts/plugin-audit.py inventory --project ~/SideProjects/hub
 python3 scripts/plugin-audit.py conflicts --project ~/SideProjects/hub
 python3 scripts/plugin-audit.py drift --reviews plugin-reviews.json
 python3 scripts/plugin-audit.py scope --projects ~/SideProjects/hub ~
+python3 scripts/plugin-audit.py usage --root ~/SideProjects --since 2026-11-01
 ```
 
 결과는 후보일 뿐입니다. 실제로 부딪히는지는 사람이 보고 [Playbook](docs/Plugin%20Playbook.md)에 정합니다. 첫 충돌 검사 결과는 [리포트](reports/2026-10-27%20%EC%B6%A9%EB%8F%8C%20%EA%B2%80%EC%82%AC.md)에 있습니다.
