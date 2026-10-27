@@ -33,6 +33,7 @@ Usage:
 import argparse
 import collections
 import glob
+import hashlib
 import itertools
 import json
 import os
@@ -355,6 +356,14 @@ def cmd_drift(args):
             found += 1
     if not found:
         print("| — | | | | | 모두 검토한 상태와 같다 |")
+    gaps = translation_gaps(plugins, load_json(args.ko))
+    print("\n## 한국어 설명이 없거나 낡은 항목 (켜진 플러그인)\n")
+    if gaps:
+        print("| 항목 | 상태 |\n|---|---|")
+        for key, state in gaps:
+            print(f"| `{key.replace('|', ' / ').rstrip(' /')}` | {state} |")
+    else:
+        print("없음")
     return 0
 
 
@@ -469,15 +478,49 @@ def cmd_summary(args):
     print(f"모든 폴더에서 켜진 스킬 {sum(len(p['skills']) for p in on)}개, 훅 {sum(len(p['hooks']) for p in on)}개, "
           f"MCP 서버 {sum(len(p['mcp']) for p in on)}개, 에이전트 {sum(len(p['agents']) for p in on)}개")
 
+def src_hash(text):
+    return hashlib.sha1((text or "").encode()).hexdigest()[:10]
+
+
+def korean(ko, key, source):
+    """Korean description for key; flags missing or outdated translations."""
+    entry = ko.get(key)
+    if not entry:
+        return "(번역 없음)"
+    if entry.get("src") != src_hash(source):
+        return entry["ko"] + " (원문이 바뀌어 번역 다시 필요)"
+    return entry["ko"]
+
+
+def translation_gaps(plugins, ko):
+    gaps = []
+    for p in plugins:
+        if not p["enabled"]:
+            continue
+        items = [(f"{p['name']}|plugin|", p["description"])]
+        items += [(f"{p['name']}|skill|{s['name'].split(':')[-1]}", s["desc"]) for s in p["skills"]]
+        items += [(f"{p['name']}|command|{c}", p["command_desc"].get(c, "")) for c in p["commands"]]
+        items += [(f"{p['name']}|agent|{a}", p["agent_desc"].get(a, "")) for a in p["agents"]]
+        for key, source in items:
+            entry = ko.get(key)
+            if not entry:
+                gaps.append((key, "번역 없음"))
+            elif entry.get("src") != src_hash(source):
+                gaps.append((key, "원문이 바뀌어 번역 다시 필요"))
+    return gaps
+
+
 def cmd_components(args):
     plugins, _ = collect(args.project, include_disabled=True)
     reviews = load_json(args.reviews)
+    ko = load_json(args.ko)
     print("---\ntype: generated\nstatus: generated\n---\n")
     print("# Plugin Components\n")
     print("플러그인마다 들어 있는 스킬, 명령, 에이전트, 훅, MCP 서버, 출력 스타일의 목록이다. "
           "`python3 scripts/plugin-audit.py components`로 만든 문서라 손으로 고치지 않는다. "
-          "스킬, 명령, 에이전트의 설명은 각 플러그인이 적어 둔 원문(대부분 영어)의 첫 문장이고, "
+          "스킬, 명령, 에이전트의 설명은 각 플러그인의 원문을 한국어로 옮긴 것이고(`plugin-descriptions.ko.json`), "
           "훅의 \"하는 일\"은 검토하면서 `plugin-reviews.json`에 적어 둔 내용이다. "
+          "사용 중지한 플러그인은 이름만 적고, 다시 켤 때 번역한다. "
           "왜 설치했는지와 상태는 [[Plugins]]에, 어떤 스킬을 먼저 쓰는지는 [[Plugin Playbook]]에 있다.\n")
     print("| 플러그인 | 켜짐 | 스킬 | 명령 | 에이전트 | 훅 | MCP | 출력 스타일 |\n|---|---|---|---|---|---|---|---|")
     for p in plugins:
@@ -488,20 +531,27 @@ def cmd_components(args):
         state = "켜짐" if p["enabled"] else "꺼짐"
         print(f"\n## {p['name']}\n")
         print(f"{p['source']} · {state} · 버전 {p['version'] or '-'}" + (f" · 커밋 {p['commit']}" if p["commit"] else ""))
-        if p["description"]:
-            print(f"\n> {first_sentence(p['description'], 300)}")
-        if p["skills"]:
+        if not p["enabled"]:
+            names = [f"`{p['name']}:{sk['name'].split(':')[-1]}`" for sk in sorted(p["skills"], key=lambda x: x["name"])]
+            names += [f"`/{c}`" for c in p["commands"]] + [f"`{a}`" for a in p["agents"]]
+            print("\n사용 중지한 플러그인이라 이름만 적는다. 다시 켤 때 설명을 번역한다.")
+            if names:
+                print(f"\n스킬 {len(p['skills'])}개, 명령 {len(p['commands'])}개, 에이전트 {len(p['agents'])}개: " + ", ".join(names))
+        else:
+            print(f"\n> {korean(ko, p['name'] + '|plugin|', p['description'])}")
+        if p["enabled"] and p["skills"]:
             print(f"\n**스킬 {len(p['skills'])}개**\n\n| 스킬 | 설명 |\n|---|---|")
             for sk in sorted(p["skills"], key=lambda x: x["name"]):
-                print(f"| `{p['name']}:{sk['name'].split(':')[-1]}` | {first_sentence(sk['desc'])} |")
-        if p["commands"]:
+                short = sk["name"].split(":")[-1]
+                print(f"| `{p['name']}:{short}` | {korean(ko, p['name'] + '|skill|' + short, sk['desc'])} |")
+        if p["enabled"] and p["commands"]:
             print(f"\n**명령 {len(p['commands'])}개**\n\n| 명령 | 설명 |\n|---|---|")
             for c in p["commands"]:
-                print(f"| `/{c}` | {first_sentence(p['command_desc'].get(c, ''))} |")
-        if p["agents"]:
+                print(f"| `/{c}` | {korean(ko, p['name'] + '|command|' + c, p['command_desc'].get(c, ''))} |")
+        if p["enabled"] and p["agents"]:
             print(f"\n**에이전트 {len(p['agents'])}개**\n\n| 에이전트 | 설명 |\n|---|---|")
             for a in p["agents"]:
-                print(f"| `{a}` | {first_sentence(p['agent_desc'].get(a, ''))} |")
+                print(f"| `{a}` | {korean(ko, p['name'] + '|agent|' + a, p['agent_desc'].get(a, ''))} |")
         if p["hooks"]:
             notes = reviews.get(p["name"], {}).get("hooks", {})
             print(f"\n**훅 {len(p['hooks'])}개** (부르지 않아도 정해진 시점마다 실행된다)\n\n| 시점 | 대상 | 하는 일 | 대화에 지시를 넣을 수 있음 |\n|---|---|---|---|")
@@ -533,6 +583,7 @@ def main():
             sp.add_argument("--top", type=int, default=30)
         if name in ("drift", "components"):
             sp.add_argument("--reviews", default="plugin-reviews.json")
+            sp.add_argument("--ko", default="plugin-descriptions.ko.json")
     sc = sub.add_parser("scope")
     sc.add_argument("--projects", nargs="+", default=[os.getcwd()])
     us = sub.add_parser("usage")

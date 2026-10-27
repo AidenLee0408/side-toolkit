@@ -117,7 +117,7 @@ last_reviewed: 2026-10-27
 **설치와 업데이트**
 - 새 플러그인은 [Plugin Review](Plugin%20Review.md) 순서로 검토한 뒤 설치하고, `plugin-reviews.json`에 검토한 버전과 커밋을 적는다.
 - 같은 서비스는 한 플러그인에서만 로그인한다(DEC-001 외부 서비스 연결은 플러그인 우선 (운영 허브 문서)).
-- 지금 단계에 필요 없는 플러그인은 `claude plugin disable <이름>`으로 사용을 중지한다. 다시 켤 때는 `claude plugin enable <이름>`을 실행하고, 한 저장소에서만 쓰려면 `--scope project`를 붙인다.
+- 지금 단계에 필요 없는 플러그인은 `claude plugin disable <이름>`으로 사용을 중지한다. 다시 켤 때는 `claude plugin enable <이름>`을 실행하고, 한 저장소에서만 쓰려면 `--scope project`를 붙인다. 다시 켜면 그 플러그인의 설명을 `plugin-descriptions.ko.json`에 한국어로 옮긴다.
 
 **폴더별 적용 범위**
 - 한국어 문체 플러그인(fluent-korean, humanize-korean)은 허브와 제품 저장소에서만 켠다. 새 제품 저장소를 만들면 그 저장소에서 아래 두 명령을 실행하고, `.claude/settings.json`에 `"outputStyle": "fluent-korean"`을 넣는다.
@@ -131,7 +131,7 @@ last_reviewed: 2026-10-27
 - 실제 작업에서 놓친 패턴이 보이면 [Plugin Issues](Plugin%20Issues.md)에 남기고 스킬에 추가한다.
 
 **공개 저장소 반영**
-- 플러그인 문서(`Plugins.md`, `Plugin Components.md`, `Plugin Review.md`, `Plugin Playbook.md`, `Plugin Changelog.md`, `Plugin Issues.md`, `Plugin Reports/`, `plugin-reviews.json`, `scripts/plugin-audit.py`)는 허브가 원본이다. 평소에는 허브에서만 고친다.
+- 플러그인 문서(`Plugins.md`, `Plugin Components.md`, `plugin-descriptions.ko.json`, `Plugin Review.md`, `Plugin Playbook.md`, `Plugin Changelog.md`, `Plugin Issues.md`, `Plugin Reports/`, `plugin-reviews.json`, `scripts/plugin-audit.py`)는 허브가 원본이다. 평소에는 허브에서만 고친다.
 - 공개 저장소 `products/side-toolkit`에는 주간 점검 때 한 번에 반영한다. 공개 저장소이므로 실제 사용자 정보, 키, 개인 경로를 쓰지 않는다.
 
 ## 6. 주간 점검
@@ -139,7 +139,7 @@ last_reviewed: 2026-10-27
 주간 리뷰 때 이 순서로 한다. 결과는 그 주의 `Weekly Reviews/YYYY-Www.md`에 짧게 남긴다.
 
 0. **구성 요소 목록 갱신:** `python3 scripts/plugin-audit.py components > "Plugin Components.md"`로 [Plugin Components](Plugin%20Components.md)를 다시 만든다.
-1. **업데이트 확인:** `python3 scripts/plugin-audit.py drift --reviews plugin-reviews.json`. "다시 검토 필요"나 "검토 기록 없음"이 나오면 [Plugin Review](Plugin%20Review.md) 순서로 검토한다.
+1. **업데이트 확인:** `python3 scripts/plugin-audit.py drift --reviews plugin-reviews.json`. "다시 검토 필요"나 "검토 기록 없음"이 나오면 [Plugin Review](Plugin%20Review.md) 순서로 검토한다. "한국어 설명이 없거나 낡은 항목"이 나오면 `plugin-descriptions.ko.json`에 옮기고 0번을 다시 한다.
 2. **충돌 확인:** 지난주에 플러그인을 설치하거나 업데이트했다면 `python3 scripts/plugin-audit.py conflicts`를 실행하고, 실제 충돌은 2번 표에 추가한다.
 3. **공식 플러그인 출시 확인:** Integrations (운영 허브 문서)의 커넥터 서비스마다 공식 플러그인이 나왔는지 플러그인 디렉터리에서 검색하고, 결과를 같은 문서의 "공식 플러그인 출시 확인 기록"에 한 줄 남긴다. 나왔으면 창업자에게 설치를 제안한다.
 4. **리포트 반영:** 새 리포트를 읽고, 같은 결과가 두 번 이상 나왔으면 1번, 2번 표의 근거를 "가설"에서 리포트 이름으로 바꾼다. 바꾼 내용은 [Plugin Changelog](Plugin%20Changelog.md)에 남긴다.
@@ -147,7 +147,7 @@ last_reviewed: 2026-10-27
 6. **공개 저장소 반영:** `products/side-toolkit`에서 순서대로 한다.
    1. `scripts/sync-from-hub.sh`로 허브 문서를 복사한다.
    2. 키와 개인 정보가 들어갔는지 검사한다.
-   3. 바뀐 문서의 문장을 점검한다. 한국어는 `checking-korean-writing`, 영어는 `writing-quality`를 쓰고, 고칠 곳은 허브 원본에서 고친 뒤 다시 복사한다.
+   3. 바뀐 문서를 **모두** 점검한다. 스크립트로 다시 만든 Plugin Components도 포함한다. 한국어는 `checking-korean-writing`, 영어는 `writing-quality`를 쓰고, 고칠 곳은 허브 원본에서 고친 뒤 다시 복사한다.
    4. `python3 scripts/plugin-audit.py summary`로 숫자를 뽑아 README "한눈에 보기"를 맞춘다.
    5. 커밋하고 푸시한다.
 

@@ -58,6 +58,7 @@ last_reviewed: 2026-10-27
 
 - [Plugins](Plugins.md): 하는 일, 설치 이유, 상태, 검토 메모
 - `plugin-reviews.json`의 `hooks`: 훅마다 하는 일을 한 줄로 적는다
+- `plugin-descriptions.ko.json`: 켜는 플러그인의 소개, 스킬, 명령, 에이전트 설명을 한국어로 옮긴다. 사용 중지한 플러그인은 다시 켤 때 옮긴다. `plugin-audit.py drift`의 "한국어 설명이 없거나 낡은 항목"이 비어 있어야 한다
 - [Plugin Components](Plugin%20Components.md): `python3 scripts/plugin-audit.py components > "Plugin Components.md"`로 다시 만든다
 - `plugin-reviews.json`: 버전, 커밋, 검토 날짜, 검토 근거
 - [Plugin Changelog](Plugin%20Changelog.md): 설치 기록 한 줄

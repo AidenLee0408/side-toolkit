@@ -30,4 +30,5 @@ for f in "$hub/Plugin Reports/"*.md; do
 done
 cp "$hub/scripts/plugin-audit.py" "$repo/scripts/plugin-audit.py"
 cp "$hub/plugin-reviews.json" "$repo/plugin-reviews.json"
+cp "$hub/plugin-descriptions.ko.json" "$repo/plugin-descriptions.ko.json"
 git -C "$repo" status --short

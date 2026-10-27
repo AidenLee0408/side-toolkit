@@ -27,6 +27,8 @@ TRANSLATIONESE = [
     (r"하고 있는 중", "중복 진행형", "'하는 중' 또는 '하고 있다'"),
     (r"\b(그|이) (것|점)은 [^.]{0,20}(이다|입니다)", "강조 구문 (It is ~ that)", "주어를 바로 쓴다"),
 ]
+# Common English function words: a run of Latin words containing one is a sentence, not a list of names.
+FUNCTION_WORDS = {"the", "to", "and", "of", "for", "with", "when", "a", "an", "is", "or", "in", "on", "your", "that", "from", "use", "this"}
 CALQUES = ["처음 판", "미적 지시", "최종 판", "다관점", "동시 발동"]
 # Clipped labels: coined status words and jargon that read like shorthand.
 CLIPPED = ["꺼 둠", "켜 둠", "겹침 지도", "기본 담당", "주력"]
@@ -77,7 +79,7 @@ def scan(path):
         if line.strip().startswith("|") and not re.match(r"^\|[\s:|-]+\|$", line.strip()):
             cells = [c.strip() for c in line.strip().strip("|").split("|")]
         body = strip_list(line) if is_prose(line) else ""
-        targets = ([body] if body else []) + [c for c in cells if HANGUL.search(c)]
+        targets = ([body] if body else []) + [c for c in cells if c]
         for t in targets:
             clean = re.sub(r"`[^`]*`", "CODE", t)
             for pat, cat, tip in TRANSLATIONESE:
@@ -95,7 +97,14 @@ def scan(path):
             for m in re.finditer(r"[가-힣]+\s?/\s?[가-힣]+(\s?/\s?[가-힣]+)*", clean):
                 if t is body:
                     hits.append((no, "빗금으로 잇기", m.group(0), "쉼표나 '또는'으로 쓴다"))
-            if clean.count("—") >= 1:
+            english = re.sub(r"https?://\S+|\[[^\]]*\]\([^)]*\)|\bCODE\b", " ", clean)
+            if not t.lstrip().startswith(("**English", "English:")):
+                for m in re.finditer(r"(?:[A-Za-z][A-Za-z'’-]*[ ,;:/()]+){4,}[A-Za-z][A-Za-z'’-]*", english):
+                    words = set(re.findall(r"[a-z]+", m.group(0)))
+                    if words & FUNCTION_WORDS:
+                        hits.append((no, "영어 문장", m.group(0)[:40], "한국어 문서에서는 한국어로 옮긴다 (고유명사, 명령, 코드는 그대로)"))
+                        break
+            if clean.count("—") >= 1 and clean.strip() not in ("—", "-"):
                 hits.append((no, "줄표", "—", "쉼표나 문장 나누기로 바꾼다"))
             for m in re.finditer(r"(?:[가-힣0-9]*[가-힣][가-힣0-9]*\s){3,}[가-힣]{2,}", clean):
                 words = m.group(0).split()
