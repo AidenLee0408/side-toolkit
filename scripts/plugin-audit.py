@@ -280,7 +280,7 @@ def cmd_conflicts(args):
     for topic, words in TOPICS.items():
         hit = [s for s in skills if any(re.search(r"(?<![a-z])" + re.escape(w) + r"(?![a-z])", head(s)) for w in words)]
         if len({s["plugin"] for s in hit}) > 1:
-            listed = ", ".join(f"{s['plugin']}:{s['name']}" for s in sorted(hit, key=lambda s: s["plugin"]))
+            listed = ", ".join(f"`{s['plugin']}:{s['name']}`" for s in sorted(hit, key=lambda s: s["plugin"]))
             print(f"| {topic} | {len({s['plugin'] for s in hit})} | {listed} |")
 
     print(f"\n## 3. 설명이 많이 겹치는 스킬 쌍 (겹침 {args.min} 이상, 상위 {args.top}개)\n")
