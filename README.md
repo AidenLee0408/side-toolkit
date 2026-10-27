@@ -64,7 +64,7 @@
 | 스킬 | 하는 일 |
 |---|---|
 | [writing-concise-korean](plugins/side-skills/skills/writing-concise-korean/SKILL.md) | 한국어판 caveman입니다. 내용은 줄이되 조사와 어미는 지켜서, 짧게 써도 문장이 깨지지 않게 합니다 |
-| [writing-literal-ui-copy](plugins/side-skills/skills/writing-literal-ui-copy/SKILL.md) | 제품 화면의 버튼, 메뉴, 기능 이름, 알림, 오류와 보안 경고를 비유나 의인화 없이 사실 그대로 쓰게 합니다. 예를 들어 "이 페이지의 주인" 대신 "현재 접속 중인 페이지 주소"라고 씁니다 |
+| [writing-literal-text](plugins/side-skills/skills/writing-literal-text/SKILL.md) | 사람이 읽는 모든 글(제품 화면, 문서, README, 표, 상태 이름)을 비유, 의인화, 줄여 만든 용어 없이 사실 그대로 쓰게 합니다. 예를 들어 "이 페이지의 주인" 대신 "현재 접속 중인 페이지 주소", "꺼 둠" 대신 "사용 중지"라고 씁니다 |
 | [checking-korean-writing](plugins/side-skills/skills/checking-korean-writing/SKILL.md) | 한국어판 writing-quality입니다. 명사 나열, 명사로 끝나는 문장, 빗금, 영어 직역, 번역투를 찾아 알려 주고, 요청하면 고칩니다. 스캐너 스크립트가 들어 있습니다 |
 
 설치는 Claude Code에서 두 줄이면 됩니다.
