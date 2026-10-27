@@ -39,20 +39,20 @@
 
 ## 영역별로 먼저 쓰는 스킬
 
-한 작업에는 먼저 쓸 스킬을 하나만 정합니다. 자세한 기준과 근거는 [Playbook](docs/Plugin%20Playbook.md)에 있습니다.
+한 작업에는 먼저 쓸 스킬을 하나만 정합니다. 플러그인이 아니라 `플러그인:스킬` 단위로 적습니다. 자세한 기준, 부딪히는 스킬과 훅, 근거는 [Playbook](docs/Plugin%20Playbook.md)에 있습니다.
 
 | 영역 | 먼저 쓰는 스킬 | 함께 비교하는 스킬 |
 |---|---|---|
-| 개발 절차 | [superpowers](https://github.com/obra/superpowers) | ponytail, caveman |
-| 과설계 방지 | [ponytail](https://github.com/DietrichGebert/ponytail) (lite) | caveman `lean-build` |
-| 랜딩 페이지 디자인 | [taste-skill](https://github.com/Leonxlnx/taste-skill) | frontend-design, impeccable, ui-ux-pro-max |
-| 제품 UI 디자인 | [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | frontend-design |
-| UI 점검과 다듬기 | [impeccable](https://github.com/pbakaus/impeccable) | — |
-| 시장 전략 | gtm-planner | product-management |
-| 마케팅 실행 | [marketingskills](https://github.com/coreyhaines31/marketingskills) | marketing (Anthropic) |
-| 코드 리뷰 | `/code-review` | review-council |
-| 한국어 문서 | [fluent-korean](https://github.com/snflkd/fluent-korean), checking-korean-writing (자체 제작) | [im-not-ai](https://github.com/epoko77-ai/im-not-ai) |
-| 영어 문구 | writing-quality | marketingskills `copy-editing` |
+| 개발 절차 | [superpowers](https://github.com/obra/superpowers)`:writing-plans`, `:test-driven-development` | `ponytail:ponytail`, `caveman:lean-build` |
+| 과설계 방지 | [ponytail](https://github.com/DietrichGebert/ponytail)`:ponytail` (lite) | `caveman:lean-build` |
+| 랜딩 페이지 디자인 | [taste-skill](https://github.com/Leonxlnx/taste-skill)`:design-taste-frontend` | `frontend-design:frontend-design`, `impeccable:impeccable`, `ui-ux-pro-max:ui-ux-pro-max` |
+| 제품 UI 디자인 | [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)`:ui-ux-pro-max` | `frontend-design:frontend-design` |
+| UI 점검과 다듬기 | [impeccable](https://github.com/pbakaus/impeccable)`:impeccable` | — |
+| 시장 전략 | `gtm-planner:positioning` | `product-management:brainstorm` |
+| 마케팅 실행 | [marketingskills](https://github.com/coreyhaines31/marketingskills)`:launch`, `:copywriting` 등 | `marketing:campaign-plan`, `marketing:draft-content` (Anthropic) |
+| 코드 리뷰 | `/code-review` | `review-council:review-council`, `caveman:caveman-review` |
+| 한국어 문서 | [fluent-korean](https://github.com/snflkd/fluent-korean) (출력 스타일), `side-skills:checking-korean-writing` | [im-not-ai](https://github.com/epoko77-ai/im-not-ai)`:humanize-korean` |
+| 영어 문구 | `writing-quality:writing-enforcer` | `marketing-skills:copy-editing` |
 
 <br>
 

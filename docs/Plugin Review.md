@@ -52,6 +52,8 @@ last_reviewed: 2026-10-27
 
 설치한 뒤 `python3 scripts/plugin-audit.py conflicts`를 실행한다. 실제 충돌은 [Plugin Playbook](Plugin%20Playbook.md)의 2번 표에 추가한다.
 
+충돌은 플러그인끼리 적지 않고, 실제로 부딪히는 구성 요소끼리 적는다. 스킬은 `플러그인:스킬`, 훅은 `플러그인 (훅: 시점)`, 출력 스타일은 `플러그인 (출력 스타일)`로 쓰고, 한 줄에 한 쌍만 적는다.
+
 ## 7. 기록한다
 
 - [Plugins](Plugins.md): 하는 일, 설치 이유, 상태, 검토 메모
