@@ -28,7 +28,7 @@
 
 | 문서 | 이럴 때 보세요 |
 |---|---|
-| 📦 [**Plugins**](docs/Plugins.md) | 어떤 플러그인을 왜 설치했는지, 안에 무엇이 들어 있는지, 지금 상태와 기능이 겹치는 것이 궁금할 때 |
+| 📦 [**Plugins**](docs/Plugins.md) | 어떤 플러그인을 왜 설치했는지, 안에 무엇이 들어 있는지, 지금 상태와 기능이 겹치는 스킬이 궁금할 때 |
 | 🔍 [**Plugin Review**](docs/Plugin%20Review.md) | 새 플러그인이나 업데이트를 어떤 순서로 검토하는지 볼 때 |
 | 🧭 [**Plugin Playbook**](docs/Plugin%20Playbook.md) | "이 작업엔 어떤 스킬을 먼저 쓰지?" 할 때 |
 | 📝 [**Plugin Changelog**](docs/Plugin%20Changelog.md) | 설치, 사용 중지, 우선순위 변경처럼 무엇이 언제 왜 바뀌었는지 볼 때 |

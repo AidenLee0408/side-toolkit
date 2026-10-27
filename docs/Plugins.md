@@ -129,26 +129,35 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 | Amplitude, Figma | marketing, product-management |
 | Asana, Atlassian, Linear | engineering, product-management |
 
-## 기능이 겹치는 플러그인 (2026-10-27)
+## 기능이 겹치는 스킬 (2026-10-27)
 
-같은 일을 하는 플러그인이 여러 개 있다. 영역마다 **기본으로 쓸 플러그인**을 하나 정하고, 나머지는 리포트로 비교한 뒤 남기거나 끈다. 작업별 순서는 [Plugin Playbook](Plugin%20Playbook.md)에 있다.
+같은 일을 하는 스킬이 여러 플러그인에 있다. 영역마다 **기본으로 쓸 스킬**을 하나 정하고, 나머지는 리포트로 비교한 뒤 남기거나 끈다. 비교는 플러그인끼리가 아니라 스킬, 훅, 출력 스타일끼리 한다. 표기는 `플러그인:스킬`, `플러그인 (훅: 시점)`, `플러그인 (출력 스타일)`이다. 부딪히는 쌍과 처리 방법은 [Plugin Playbook](Plugin%20Playbook.md)의 2번 표에 있다.
 
 | 영역 | 기본으로 쓸 것 | 겹치는 것 | 비교할 점 |
 |---|---|---|---|
-| 개발 절차 | superpowers | ponytail, caveman의 작업 스킬(lean-build, surgical-patch 등) | ponytail lite가 계획이나 TDD를 방해하는가 |
-| 과설계 방지 | ponytail (lite) | caveman `lean-build` | 둘 중 하나만 남긴다 |
-| 코드 리뷰 | `/code-review` | review-council, caveman-review, engineering `code-review` | 큰 변경에서 review-council이 문제를 더 찾는가 |
-| 코드 정리 | `/simplify` | ponytail-review | — |
-| 랜딩·마케팅 페이지 디자인 | taste-skill | frontend-design, impeccable, ui-ux-pro-max | 첫 랜딩 페이지에서 결과를 비교한다 |
-| 제품 UI 디자인 | ui-ux-pro-max | frontend-design, impeccable | — |
-| UI 점검·다듬기 | impeccable | ui-ux-pro-max | 훅 때문에 느려지는 만큼 효과가 있는가 |
-| 시장 전략 | gtm-planner | product-management, marketing(Anthropic) `campaign-plan` | — |
-| 마케팅 실행 | marketing-skills | marketing(Anthropic) | 하나만 남긴다 |
-| 경쟁 분석 | product-management `competitive-brief` | marketing(Anthropic) `competitive-brief`, marketing-skills `competitor-profiling` | — |
-| SEO | marketing-skills `seo-audit`, `ai-seo` | marketing(Anthropic) `seo-audit` | 보류 중인 claude-seo가 필요한가 |
-| 한국어 글 | fluent-korean(쓸 때, 허브와 제품만) + checking-korean-writing(공개 전) | humanize-korean(긴 글을 깊게 다듬을 때) | caveman은 writing-concise-korean으로 보완한다 |
-| 영어 글 다듬기 | writing-quality | marketing-skills `copy-editing` | 랜딩 문구는 copy-editing, 그 밖의 영어 글은 writing-quality로 다듬는다 |
-| 브라우저 테스트 | playwright | 앱 내장 브라우저, taste-skill 검사기 | — |
+| 계획 | `superpowers:writing-plans` | `ponytail (훅: 메시지 입력)` | ponytail lite가 계획을 지나치게 줄이는가 |
+| 테스트 | `superpowers:test-driven-development` | `ponytail (훅: 메시지 입력)` | ponytail이 테스트를 건너뛰게 하는가 |
+| 과설계 방지 | `ponytail:ponytail` (lite) | `caveman:lean-build` | 둘 중 하나만 남긴다 |
+| 디버깅 | `superpowers:systematic-debugging` | `engineering:debug`, `caveman:investigate-first` | — |
+| 코드 리뷰 | `/code-review` | `engineering:code-review`, `caveman:caveman-review`, `ponytail:ponytail-review`, `review-council:review-council`, `superpowers:requesting-code-review` | 큰 변경에서 review-council이 문제를 더 찾는가 |
+| 코드 정리 | `/simplify` | `ponytail:ponytail-review` | — |
+| 브레인스토밍 | `product-management:brainstorm` (제품), `superpowers:brainstorming` (기능 설계) | `product-management:product-brainstorming` | — |
+| 랜딩·마케팅 페이지 디자인 | `taste-skill:design-taste-frontend` | `frontend-design:frontend-design`, `ui-ux-pro-max:ui-ux-pro-max`, `impeccable:impeccable` | 첫 랜딩 페이지에서 결과를 비교한다 |
+| 제품 UI 디자인 | `ui-ux-pro-max:ui-ux-pro-max` | `frontend-design:frontend-design`, `impeccable:impeccable` | — |
+| 디자인 시스템 | `ui-ux-pro-max:design-system` | `impeccable:impeccable` (document) | — |
+| UI 점검·다듬기 | `impeccable:impeccable` (polish, audit) | `ui-ux-pro-max:ui-ux-pro-max` | `impeccable (훅: 파일 수정 후, 답변 끝)` 때문에 느려지는 만큼 효과가 있는가 |
+| 시장 전략 | `gtm-planner:positioning` | `marketing:campaign-plan` | — |
+| 캠페인·런칭 | `marketing-skills:launch`, `marketing-skills:marketing-plan` | `marketing:campaign-plan` | 하나만 남긴다 |
+| 콘텐츠·카피 | `marketing-skills:copywriting`, `marketing-skills:content-strategy` | `marketing:content-creation`, `marketing:draft-content` | 하나만 남긴다 |
+| 이메일 시퀀스 | `marketing-skills:emails` | `marketing:email-sequence` | — |
+| 경쟁 분석 | `product-management:competitive-brief` (기획), `marketing-skills:competitor-profiling` (홍보) | `marketing:competitive-brief` | — |
+| SEO | `marketing-skills:seo-audit`, `marketing-skills:ai-seo` | `marketing:seo-audit` | 보류 중인 claude-seo가 필요한가 |
+| 지표 정리 | 정하지 않음 | `marketing:performance-report`, `marketing-skills:analytics`, `product-management:metrics-review` | 출시 후 첫 지표 검토 때 비교한다 |
+| 고객 조사 | `product-management:synthesize-research` (정리), `marketing-skills:customer-research` (수집) | — | — |
+| 브랜드 | 정하지 않음 | `marketing:brand-review`, `ui-ux-pro-max:brand` | 브랜드를 정할 때 비교한다 |
+| 한국어 글 | `fluent-korean (출력 스타일)` (쓸 때, 허브와 제품만) + `side-skills:checking-korean-writing` (공개 전) | `humanize-korean:humanize-korean` (긴 글을 깊게 다듬을 때) | `caveman (훅: 메시지 입력)`은 `side-skills:writing-concise-korean`으로 보완한다 |
+| 영어 글 다듬기 | `writing-quality:writing-enforcer` | `marketing-skills:copy-editing` | 랜딩 문구는 copy-editing, 그 밖의 영어 글은 writing-enforcer로 다듬는다 |
+| 브라우저 테스트 | `playwright` MCP | 앱 내장 브라우저, `taste-skill:design-taste-frontend`의 검사기 | — |
 
 ### 부담이 큰 플러그인
 
