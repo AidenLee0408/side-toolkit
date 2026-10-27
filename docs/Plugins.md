@@ -102,8 +102,7 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 | 스킬 | 하는 일 | 만든 이유 | 검증 | 상태 |
 |---|---|---|---|---|
 | **writing-concise-korean** | 한국어판 caveman이다. 내용은 줄이되 조사와 어미는 지켜서, 짧게 써도 문장이 깨지지 않게 한다 | caveman을 쓰면서도 한국어 답변이 명사 나열로 깨지지 않게 하려고 | 스킬이 있을 때와 없을 때를 비교하는 시험은 아직 하지 못했다 | 시험 사용 (모든 프로젝트) |
-| **writing-literal-text** | 사람이 읽는 모든 글(제품 화면, 문서, README, 표, 제목, 상태 이름)을 비유, 의인화, 추상어, 줄여 만든 용어 없이 사실 그대로 쓰게 한다(UI Wording 규칙). 오류와 보안 경고도 다룬다 | UI Wording 규칙을 어느 저장소 세션에서든 쓰려고 | 비교 시험은 아직 못 했다 | 시험 사용 (모든 프로젝트) |
-| **checking-korean-writing** | 한국어판 writing-quality다. 명사 나열, 명사로 끝나는 문장, 빗금, 영어 직역, 번역투를 찾아 알려 주고(DETECT), 요청하면 고친다(REWRITE). 스캐너 `scan_korean.py`가 들어 있다 | writing-enforcer가 한국어를 검사하지 못해서 | 이 허브에서 손으로 고쳤던 문서의 수정 전 버전으로 시험했다. 알려진 어색한 표현을 조사 오류 1건만 빼고 모두 찾았다 | 시험 사용 (모든 프로젝트) |
+| **writing-clear-korean** | 사람이 읽는 글(문서, README, 표, 상태 이름, 제품 화면, 알림, 경고)을 두 단계로 다룬다. 1단계는 한국어와 영어 모두 비유, 의인화, 줄여 만든 용어 없이 사실 그대로 쓰기, 2단계는 한국어 문장 점검(스캐너 `scan_korean.py`로 명사 나열, 영어 직역, 영어 문장 섞기, 번역투 등) | 예전 checking-korean-writing과 writing-literal-text를 합쳤다. 늘 함께 쓰고 내용도 겹쳐서 | 이 허브에서 손으로 고친 문서로 시험했다. 합친 뒤에도 스캐너 결과가 같다 | 시험 사용 (모든 프로젝트) |
 
 ## 폴더별로 켜지는 플러그인
 
@@ -156,7 +155,7 @@ Anthropic 공식 마켓플레이스(`anthropics/claude-plugins-official`, `anthr
 | 지표 정리 | 정하지 않음 | `marketing:performance-report`, `marketing-skills:analytics`, `product-management:metrics-review` | 출시 후 첫 지표 검토 때 비교한다 |
 | 고객 조사 | `product-management:synthesize-research` (정리), `marketing-skills:customer-research` (수집) | — | — |
 | 브랜드 | 정하지 않음 | `marketing:brand-review`, `ui-ux-pro-max:brand` | 브랜드를 정할 때 비교한다 |
-| 한국어 글 | `fluent-korean (출력 스타일)` (쓸 때, 허브와 제품만) + `side-skills:checking-korean-writing` (공개 전) | `humanize-korean:humanize-korean` (긴 글을 깊게 다듬을 때) | `caveman (훅: 메시지 입력)`은 `side-skills:writing-concise-korean`으로 보완한다 |
+| 한국어 글 | `fluent-korean (출력 스타일)` (쓸 때, 허브와 제품만) + `side-skills:writing-clear-korean` (공개 전) | `humanize-korean:humanize-korean` (긴 글을 깊게 다듬을 때) | `caveman (훅: 메시지 입력)`은 `side-skills:writing-concise-korean`으로 보완한다 |
 | 영어 글 다듬기 | `writing-quality:writing-enforcer` | `marketing-skills:copy-editing` | 랜딩 문구는 copy-editing, 그 밖의 영어 글은 writing-enforcer로 다듬는다 |
 | 브라우저 테스트 | `playwright` MCP | 앱 내장 브라우저, `taste-skill:design-taste-frontend`의 검사기 | — |
 

@@ -51,3 +51,4 @@ last_reviewed: 2026-10-27
 | 34 | 2026-10-27 | writing-literal-ui-copy (side-skills 0.2.0) | 설치 | 없음 → 시험 사용 (자체 제작 스킬, 모든 프로젝트) | UI Wording의 화면 문구 규칙을 제품 저장소 세션에서도 쓰려고 | 창업자 결정 | 창업자 |
 | 35 | 2026-10-27 | 제품 화면 문구 | 우선순위 지정 | 없음 → `side-skills:writing-literal-ui-copy`. 랜딩과 홍보 문구는 `marketing-skills:copywriting` | 화면 안 문구와 홍보 문구의 기준이 다르다 | 창업자 결정 (UI Wording) | 창업자 |
 | 36 | 2026-10-27 | writing-literal-ui-copy → writing-literal-text (side-skills 0.3.0) | 규칙 | 제품 화면 문구만 → 사람이 읽는 모든 글(제품 화면, 문서, README, 표, 상태 이름). 줄여 만든 용어도 금지. 홍보 문구도 따르고 승인된 브랜드 표어만 예외. UI Wording 범위도 같이 넓힘 | 사람이 읽는다는 기준이면 화면과 문서를 나눌 이유가 없다 | 창업자 결정 | 창업자 |
+| 37 | 2026-10-27 | checking-korean-writing, writing-literal-text → writing-clear-korean (side-skills 0.4.0) | 규칙 | 두 스킬 → 하나로 합침. 1단계 사실 그대로 쓰기(한국어, 영어), 2단계 한국어 문장 점검 | 늘 함께 쓰고 내용이 겹쳐, 우리 스킬끼리 어느 쪽이 불릴지 정해지지 않았다 | 창업자 결정 | 창업자 |
