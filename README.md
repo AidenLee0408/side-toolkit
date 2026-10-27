@@ -13,7 +13,7 @@
 |---|---|
 | 모든 폴더에서 사용 중인 플러그인 | 19개 (claude.ai 9개, 로컬 10개) |
 | 문서 작업과 제품 저장소에서만 쓰는 플러그인 | 2개 (fluent-korean, humanize-korean) |
-| 자체 제작 플러그인 | 1개 ([side-skills](#자체-제작-스킬), 스킬 2개) |
+| 자체 제작 플러그인 | 1개 ([side-skills](#자체-제작-스킬), 스킬 3개) |
 | 사용 중지한 플러그인 | 3개 (posthog, cloudflare, stripe). 필요해지면 다시 켭니다 |
 | 켜진 구성 요소 | 스킬 156개, 훅 13개, MCP 서버 50개, 에이전트 23개 |
 | 검토 후 제외한 플러그인 | 8개 |
@@ -64,6 +64,7 @@
 | 스킬 | 하는 일 |
 |---|---|
 | [writing-concise-korean](plugins/side-skills/skills/writing-concise-korean/SKILL.md) | 한국어판 caveman입니다. 내용은 줄이되 조사와 어미는 지켜서, 짧게 써도 문장이 깨지지 않게 합니다 |
+| [writing-literal-ui-copy](plugins/side-skills/skills/writing-literal-ui-copy/SKILL.md) | 제품 화면의 버튼, 메뉴, 기능 이름, 알림, 오류와 보안 경고를 비유나 의인화 없이 사실 그대로 쓰게 합니다. 예를 들어 "이 페이지의 주인" 대신 "현재 접속 중인 페이지 주소"라고 씁니다 |
 | [checking-korean-writing](plugins/side-skills/skills/checking-korean-writing/SKILL.md) | 한국어판 writing-quality입니다. 명사 나열, 명사로 끝나는 문장, 빗금, 영어 직역, 번역투를 찾아 알려 주고, 요청하면 고칩니다. 스캐너 스크립트가 들어 있습니다 |
 
 설치는 Claude Code에서 두 줄이면 됩니다.

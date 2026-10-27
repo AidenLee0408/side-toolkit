@@ -19,7 +19,7 @@ status: generated
 | [playwright](#playwright) | 예 | 0 | 0 | 0 | 0 | 1 | 0 |
 | [ponytail](#ponytail) | 예 | 6 | 6 | 0 | 3 | 0 | 0 |
 | [posthog](#posthog) | 아니오 | 161 | 3 | 1 | 2 | 1 | 0 |
-| [side-skills](#side-skills) | 예 | 2 | 0 | 0 | 0 | 0 | 0 |
+| [side-skills](#side-skills) | 예 | 3 | 0 | 0 | 0 | 0 | 0 |
 | [stripe](#stripe) | 아니오 | 10 | 2 | 1 | 7 | 1 | 0 |
 | [supabase](#supabase) | 예 | 2 | 0 | 0 | 0 | 1 | 0 |
 | [taste-skill](#taste-skill) | 예 | 1 | 0 | 0 | 0 | 0 | 0 |
@@ -356,16 +356,17 @@ status: generated
 
 ## side-skills
 
-로컬 · 켜짐 · 버전 0.1.3 · 커밋 d41e4b7
+로컬 · 켜짐 · 버전 0.2.0 · 커밋 f79775d
 
-> 자체 제작 스킬 묶음이다. 짧지만 문법이 깨지지 않는 한국어 답변과 한국어 문체 점검을 맡는다.
+> 자체 제작 스킬 묶음이다. 짧지만 문법이 깨지지 않는 한국어 답변, 한국어 문체 점검, 사실 그대로 쓰는 화면 문구를 맡는다.
 
-**스킬 2개**
+**스킬 3개**
 
 | 스킬 | 설명 |
 |---|---|
 | `side-skills:checking-korean-writing` | 다른 사람이 읽을 한국어 글(README, 문서, 공지, 랜딩 문구, 이슈 기록)을 저장하거나 공개하기 전에 점검하고 다듬는다. 딱딱하거나 끊기거나 번역한 티가 나는 글을 고친다. |
 | `side-skills:writing-concise-korean` | 짧게 답하라는 모드(caveman 등)가 켜진 상태에서 한국어로 쓸 때, 조사와 어미가 빠진 명사 나열이 되지 않게 한다. |
+| `side-skills:writing-literal-ui-copy` | 제품 화면의 버튼, 메뉴, 기능 이름, 빈 화면 안내, 알림, 오류와 보안 경고를 쓰거나 리뷰할 때, 또는 기능, 화면, 설정의 이름을 제안할 때 쓴다. 비유나 의인화 없이 사실 그대로 쓰게 한다. |
 
 ## stripe
 
