@@ -50,7 +50,7 @@ last_reviewed: 2026-10-27
 | `seo-audit` (marketing ↔ marketing-skills) | 이름이 같다 | marketing-skills `seo-audit`을 쓴다 | 2026-10-27 스킬 충돌 검사 |
 | 브레인스토밍 (superpowers ↔ product-management) | 둘 다 브레인스토밍을 맡는다 | 제품 아이디어는 product-management, 기능 설계 직전은 superpowers `brainstorming`을 쓴다 | 2026-10-27 스킬 충돌 검사 |
 | 고객 조사 (marketing-skills `customer-research` ↔ product-management `synthesize-research`) | 조사 정리가 겹친다 | 조사 결과 정리는 product-management, 리뷰와 커뮤니티 수집은 marketing-skills를 쓴다 | 2026-10-27 스킬 충돌 검사 |
-| 세션 시작 훅 5개 (caveman, impeccable, ponytail, aws-startup-advisor, superpowers) | 세션마다 여러 지시가 한꺼번에 들어온다. aws-startup-advisor는 보류 상태인데도 "스타트업 관점" 지시를 넣는다 | aws-startup-advisor 사용 중지를 제안한다 | 2026-10-27 스킬 충돌 검사 |
+| 세션 시작 훅 5개 (caveman, impeccable, ponytail, aws-startup-advisor, superpowers) | 세션마다 여러 지시가 한꺼번에 들어온다. aws-startup-advisor는 보류 상태인데도 "스타트업 관점" 지시를 넣는다 | aws-startup-advisor는 창업자 결정으로 켜 두고, 답변이 스타트업 관점으로 치우치는지 지켜본다 | 2026-10-27 스킬 충돌 검사, 창업자 결정 |
 
 ## 3. 스킬을 쓰지 않아도 되는 경우
 
