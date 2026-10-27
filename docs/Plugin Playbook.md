@@ -29,12 +29,12 @@ last_reviewed: 2026-10-27
 | UI 다듬기와 점검 | `impeccable:impeccable` (polish, audit) | — | `taste-skill:design-taste-frontend`, `ui-ux-pro-max:ui-ux-pro-max` | 가설 |
 | 랜딩 페이지 문구 | `marketing-skills:copywriting` | `writing-quality:writing-enforcer` | `marketing:draft-content` | 가설 |
 | 가격과 결제 화면 | `marketing-skills:pricing`, `marketing-skills:paywalls` | `stripe:stripe-best-practices` (다시 켠 뒤) | — | 가설 |
-| 제품 화면 문구와 기능 이름 | `side-skills:writing-literal-ui-copy` | `marketing-skills:copy-editing` (영어 문구) | — | 창업자 결정 2026-10-27 (UI Wording) |
+| 사람이 읽는 글의 이름과 표현 (제품 화면, 문서, README, 표, 상태 이름) | `side-skills:writing-literal-text` | `side-skills:checking-korean-writing` (한국어 문장), `marketing-skills:copy-editing` (영어 홍보 문구) | — | 창업자 결정 2026-10-27 (UI Wording) |
 | 가입과 온보딩 | `marketing-skills:signup`, `marketing-skills:onboarding` | — | — | 가설 |
 | 런칭 | `marketing-skills:launch`, `marketing-skills:directory-submissions` | `gtm-planner:roadmap` | `marketing:campaign-plan` | 가설 |
 | 배포 전 점검 | `engineering:deploy-checklist` | `superpowers:verification-before-completion` | — | 가설 |
 | 허브 기록과 내부 문서 | 스킬 없이 한다 | — | `caveman (훅: 메시지 입력)` 대신 평소 말투 (보고가 지나치게 짧아진다) | 가설 |
-| 한국어 공개 문서 (README, side-toolkit) | `fluent-korean (출력 스타일)`로 처음부터 쓰고(허브와 제품만), 공개 전에 `side-skills:checking-korean-writing`으로 점검한다 | `humanize-korean:humanize-korean` (긴 글을 깊게 다듬을 때) | `writing-quality:writing-enforcer` (한국어를 검사하지 못한다) | 창업자 결정 2026-10-27, Plugin Issues #9 |
+| 한국어 공개 문서 (README, side-toolkit) | `fluent-korean (출력 스타일)`로 처음부터 쓰고(허브와 제품만), 공개 전에 `side-skills:checking-korean-writing`(문장)과 `side-skills:writing-literal-text`(이름과 표현)로 점검한다 | `humanize-korean:humanize-korean` (긴 글을 깊게 다듬을 때) | `writing-quality:writing-enforcer` (한국어를 검사하지 못한다) | 창업자 결정 2026-10-27, Plugin Issues #9 |
 | 영어 문구 (랜딩, 홍보, 영어 문서) | `writing-quality:writing-enforcer` | `marketing-skills:copy-editing` (홍보 문구) | — | 창업자 결정 2026-10-27 |
 
 ## 2. 부딪히는 조합
@@ -85,7 +85,7 @@ last_reviewed: 2026-10-27
 | `caveman (훅: 메시지 입력)` ↔ `fluent-korean (출력 스타일)` | 짧게 줄이라는 지시와 완결된 문장으로 쓰라는 지시가 정반대다 | caveman은 그대로 두고, 한국어 답변은 `side-skills:writing-concise-korean`을 따른다. fluent-korean은 허브와 제품 저장소에서만 켠다 | 창업자 결정 2026-10-27, Plugin Issues #10 |
 | `caveman (훅: 메시지 입력)` ↔ 창업자 보고 | 설명이 지나치게 짧아진다 | 허브 보고는 평소 말투로 쓴다 | 가설 |
 | `side-skills:checking-korean-writing` ↔ `humanize-korean:humanize-korean` | 둘 다 한국어 문체를 고친다 | 공개 전 점검은 checking-korean-writing, 긴 글을 깊게 다듬을 때만 humanize-korean을 쓴다 | 가설 |
-| `side-skills:writing-literal-ui-copy` ↔ `marketing-skills:copywriting` | 둘 다 문구를 쓴다. copywriting은 설득하는 표현을 쓰기도 한다 | 제품 화면 안은 writing-literal-ui-copy, 랜딩 페이지와 홍보 문구는 copywriting을 쓴다 | 창업자 결정 2026-10-27 (UI Wording) |
+| `side-skills:writing-literal-text` ↔ `marketing-skills:copywriting` | copywriting은 설득하려고 비유를 쓰기도 한다 | 홍보 문구도 사람이 읽는 글이라 writing-literal-text를 따른다. 창업자가 승인한 브랜드 표어만 예외다 | 창업자 결정 2026-10-27 (UI Wording) |
 | `writing-quality:writing-enforcer` ↔ `marketing-skills:copy-editing` | 둘 다 영어 글의 AI 문체를 걷어 낸다 | 홍보 문구는 copy-editing, 그 밖의 영어 글은 writing-enforcer를 쓴다 | 가설 |
 
 **세션 시작 때 들어오는 지시**
