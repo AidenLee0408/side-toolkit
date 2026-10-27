@@ -1,7 +1,7 @@
 {
   "name": "side-skills",
-  "version": "0.3.0",
-  "description": "자체 제작 스킬 묶음: 짧지만 문법이 깨지지 않는 한국어 답변(writing-concise-korean), 한국어 문체 점검(checking-korean-writing), 사람이 읽는 모든 글을 사실 그대로 쓰기(writing-literal-text)",
+  "version": "0.4.0",
+  "description": "자체 제작 스킬 묶음: 짧지만 문법이 깨지지 않는 한국어 답변(writing-concise-korean), 사람이 읽는 글을 사실 그대로 명확하게 쓰고 점검하기(writing-clear-korean)",
   "author": {
     "name": "AidenLee0408",
     "url": "https://github.com/AidenLee0408"

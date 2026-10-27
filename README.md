@@ -13,7 +13,7 @@
 |---|---|
 | 모든 폴더에서 사용 중인 플러그인 | 19개 (claude.ai 9개, 로컬 10개) |
 | 문서 작업과 제품 저장소에서만 쓰는 플러그인 | 2개 (fluent-korean, humanize-korean) |
-| 자체 제작 플러그인 | 1개 ([side-skills](#자체-제작-스킬), 스킬 3개) |
+| 자체 제작 플러그인 | 1개 ([side-skills](#자체-제작-스킬), 스킬 2개) |
 | 사용 중지한 플러그인 | 3개 (posthog, cloudflare, stripe). 필요해지면 다시 켭니다 |
 | 켜진 구성 요소 | 스킬 156개, 훅 13개, MCP 서버 50개, 에이전트 23개 |
 | 검토 후 제외한 플러그인 | 8개 |
@@ -52,7 +52,7 @@
 | 시장 전략 | `gtm-planner:positioning` | `product-management:brainstorm` |
 | 마케팅 실행 | [marketingskills](https://github.com/coreyhaines31/marketingskills)`:launch`, `:copywriting` 등 | `marketing:campaign-plan`, `marketing:draft-content` (Anthropic) |
 | 코드 리뷰 | `/code-review` | `review-council:review-council`, `caveman:caveman-review` |
-| 한국어 문서 | [fluent-korean](https://github.com/snflkd/fluent-korean) (출력 스타일), `side-skills:checking-korean-writing` | [im-not-ai](https://github.com/epoko77-ai/im-not-ai)`:humanize-korean` |
+| 한국어 문서 | [fluent-korean](https://github.com/snflkd/fluent-korean) (출력 스타일), `side-skills:writing-clear-korean` | [im-not-ai](https://github.com/epoko77-ai/im-not-ai)`:humanize-korean` |
 | 영어 문구 | `writing-quality:writing-enforcer` | `marketing-skills:copy-editing` |
 
 <br>
@@ -64,8 +64,7 @@
 | 스킬 | 하는 일 |
 |---|---|
 | [writing-concise-korean](plugins/side-skills/skills/writing-concise-korean/SKILL.md) | 한국어판 caveman입니다. 내용은 줄이되 조사와 어미는 지켜서, 짧게 써도 문장이 깨지지 않게 합니다 |
-| [writing-literal-text](plugins/side-skills/skills/writing-literal-text/SKILL.md) | 사람이 읽는 모든 글(제품 화면, 문서, README, 표, 상태 이름)을 비유, 의인화, 줄여 만든 용어 없이 사실 그대로 쓰게 합니다. 예를 들어 "이 페이지의 주인" 대신 "현재 접속 중인 페이지 주소", "꺼 둠" 대신 "사용 중지"라고 씁니다 |
-| [checking-korean-writing](plugins/side-skills/skills/checking-korean-writing/SKILL.md) | 한국어판 writing-quality입니다. 명사 나열, 명사로 끝나는 문장, 빗금, 영어 직역, 번역투를 찾아 알려 주고, 요청하면 고칩니다. 스캐너 스크립트가 들어 있습니다 |
+| [writing-clear-korean](plugins/side-skills/skills/writing-clear-korean/SKILL.md) | 사람이 읽는 글을 두 단계로 다룹니다. 먼저 이름과 표현을 비유나 줄여 만든 용어 없이 사실 그대로 씁니다("꺼 둠" 대신 "사용 중지"). 한국어 글이면 스캐너로 명사 나열, 영어 직역, 영어 문장 섞기, 번역투를 찾아 고칩니다 |
 
 설치는 Claude Code에서 두 줄이면 됩니다.
 
